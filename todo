@@ -1,0 +1,67 @@
+sudo a2dismod php5.6 && a2enmod php7.0 && systemctl restart apache2
+
+
+
+http POST http://api2.dev/oauth/v2/token \
+    grant_type=password \
+    client_id=1_3bcbxd9e24g0gk4swg0kwgcwg4o8k8g4g888kwc44gcc0gwwk4 \
+    client_secret=4ok2x70rlfokc8g0wws8c8kwcokw80k44sg48goc0ok4w0so0k \
+    username=admin \
+    password=123
+
+
+
+
+#symfony #oauth2 https://gostash.it/ru/stashes/1676-prostoe-restful-api-na-symfony-2 
+composer require pe/symfony-bundle-oauth2-server "1.0.x-dev"
+sudo bin/console cache:clear --env=prod
+change Env:
+app.php:  $kernel = new AppKernel('dev', true);
+composer require doctrine/doctrine-migrations-bundle "^1.0"
+composer require doctrine/doctrine-migrations-bundle:1.1
+
+||AppKernel.php: new Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
+
+composer require ramsey/uuid-doctrine
+bin/console doctrine:migrations:diff
+bin/console doctrine:migrations:execute 20190123090825
+
+config.yml:
+pe_oauth2_server:
+    driver: orm
+    class:
+        access_token:  App\Entity\AccessToken
+        auth_code:     App\Entity\AuthorizationCode
+        client:        App\Entity\Client
+        refresh_token: App\Entity\RefreshToken
+        scope:         App\Entity\Scope
+    login_path: /login/ # This must be login path from configured firewall
+    name: Some Auth Server # This required for identifying server
+# app/config/config.yml
+doctrine:
+   dbal:
+       types:
+           uuid:  Ramsey\Uuid\Doctrine\UuidType
+
+ composer require symfony/maker-bundle --dev
+
+https://gist.github.com/diegonobre/341eb7b793fc841c0bba3f2b865b8d66
+
+sudo chown -R www-data:www-data /var/www/
++ запуск компосера и  прочего от  имени ввв с судо   sudo composer update   !
+
+
+
+
+
+
+http POST http://api2.dev/app_dev.php/oauth/v2/token     grant_type=password     client_id=1_3bcbxd9e24g0gk4swg0kwgcwg4o8k8g4g888kwc44gcc0gwwk4     client_secret=4ok2x70rlfokc8g0wws8c8kwcokw80k44sg48goc0ok4w0so0k     username=admin     password=123
+{
+    "access_token": "ZjkzMTZhMDc1OTg3ZTRkZWI4YTk2YTZiOWY2MmYxZTRiYTE2OGNiMzQwYzE5MTRjYjJlMDJmOTdiNDhlNzljOQ",
+    "expires_in": 3600,
+    "refresh_token": "NWFiNWE5OGJhNjdlYWU3MzUxYzNmZTYxYzcwNzM1YjZjYzQyMTAzYzc2Y2E5MjA4MzgzMjdmY2E4YTc4ZjQyZg",
+    "scope": null,
+    "token_type": "bearer"
+}
+
+
