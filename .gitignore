@@ -1,0 +1,9 @@
+vendor
+vendor/*
+/var/cache/*
+/vendor/*
+/var/logs/*
+/var/sessions/*
+!var/cache/.gitkeep
+!var/logs/.gitkeep
+!var/sessions/.gitkeep

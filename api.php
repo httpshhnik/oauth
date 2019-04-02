@@ -2,8 +2,9 @@
 //todo
 //mock api
 //
+// header("Set-Cookie: name=value; domain=api2.dev"); die;
 header('Access-Control-Allow-Origin: *');
-
+// echo '<pre>DUMMP:.'.var_export($_COOKIE,true).'</pre>';die;
 //pdo db connect or mysqli ?
 
 function generate_hash(){
@@ -11,8 +12,8 @@ function generate_hash(){
 }
 
 $response = array();
-$response["status"] = "error";
-
+$response["status"] = "Unhandled error.";
+$response["scheme"] = isset($_POST['login'])?"POST":(isset($_GET['login'])?"GET":"NONE");
 if( isset($_GET["method"])&&
      isset($_GET["login"])&&
      isset($_GET["password"])&&
@@ -113,6 +114,27 @@ if(isset($_GET["method"])){
             //жестко прописать [депозит, защита , тестдрайв]
             $response["services"] = $data;
         }
+        case "register": {
+
+        }
+        case "":{
+
+        }
+        // /statement/    Выписка
+        // /statistics/mpd/ История изменения даты следующей абонплаты
+        // /payment/credit/mini/ Включить доступ в Интернет на 15 минут
+        // /payment/lock(дата начала)
+        
+        // takepay
+
+        // /accounts traffic history/  Счетчик трафика
+        // /tarif/?account=5700   -Изменить тариф
+        // /tarif/history -История изменения пакетов услуг
+        // service("name",on|off)
+        
+        // usedeposit   //todo 
+
+        //polls    - опросы
     }
 }
 header('Content-Type: application/json');

@@ -1,6 +1,6 @@
 sudo a2dismod php5.6 && a2enmod php7.0 && systemctl restart apache2
 
-
+apt install httpie
 
 http POST http://api2.dev/oauth/v2/token \
     grant_type=password \
@@ -65,3 +65,11 @@ http POST http://api2.dev/app_dev.php/oauth/v2/token     grant_type=password    
 }
 
 
+
+
+
+
+
+if(strpos($_SERVER['REQUEST_URI'],"access_token")===false){header("Location: access_token=mock_token");
+	return;}else{die("Не отдавайте токен никому"//."<script>window.close();</script>"
+);}//todo remove 

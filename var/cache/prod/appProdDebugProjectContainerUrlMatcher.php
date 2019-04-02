@@ -17,7 +17,7 @@ class appProdDebugProjectContainerUrlMatcher extends Symfony\Bundle\FrameworkBun
 
     public function match($rawPathinfo)
     {
-        $allow = array();
+        $allow = [];
         $pathinfo = rawurldecode($rawPathinfo);
         $trimmedPathinfo = rtrim($pathinfo, '/');
         $context = $this->context;
@@ -48,11 +48,16 @@ class appProdDebugProjectContainerUrlMatcher extends Symfony\Bundle\FrameworkBun
         }
         not_homepage:
 
+        // login
+        if ('/login' === $pathinfo) {
+            return array (  '_controller' => 'AppBundle\\Controller\\SecurityController::loginAction',  '_route' => 'login',);
+        }
+
         // fos_oauth_server_token
         if ('/oauth/v2/token' === $pathinfo) {
             $ret = array (  '_controller' => 'fos_oauth_server.controller.token:tokenAction',  '_route' => 'fos_oauth_server_token',);
-            if (!in_array($canonicalMethod, array('GET', 'POST'))) {
-                $allow = array_merge($allow, array('GET', 'POST'));
+            if (!in_array($canonicalMethod, ['GET', 'POST'])) {
+                $allow = array_merge($allow, ['GET', 'POST']);
                 goto not_fos_oauth_server_token;
             }
 
