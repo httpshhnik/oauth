@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace JMS\Serializer\Tests\Fixtures\Doctrine;
 
 use Doctrine\Common\Collections\ArrayCollection;
@@ -16,7 +14,6 @@ use JMS\Serializer\Annotation\XmlRoot;
 
 /**
  * @ORM\Entity
- *
  * @XmlRoot("blog-post")
  */
 class BlogPost
@@ -28,7 +25,6 @@ class BlogPost
 
     /**
      * @ORM\Column(type="string")
-     *
      * @Groups({"comments","post"})
      */
     private $title;
@@ -40,18 +36,17 @@ class BlogPost
 
     /**
      * @ORM\Column(type="datetime")
-     *
      * @XmlAttribute
      */
     private $createdAt;
 
     /**
      * @ORM\Column(type="boolean")
-     *
      * @Type("integer")
      * This boolean to integer conversion is one of the few changes between this
      * and the standard BlogPost class. It's used to test the override behavior
      * of the DoctrineTypeDriver so notice it, but please don't change it.
+     *
      * @SerializedName("is_published")
      * @Groups({"post"})
      * @XmlAttribute
@@ -60,7 +55,6 @@ class BlogPost
 
     /**
      * @ORM\OneToMany(targetEntity="Comment", mappedBy="blogPost")
-     *
      * @XmlList(inline=true, entry="comment")
      * @Groups({"comments"})
      */
@@ -68,14 +62,13 @@ class BlogPost
 
     /**
      * @ORM\OneToOne(targetEntity="Author")
-     *
      * @Groups({"post"})
      */
     private $author;
 
     /**
-     * @Serializer\Exclude()
      * @ORM\Column(type="integer")
+     * @Serializer\Exclude()
      */
     private $ref;
 

@@ -4,12 +4,10 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit835ad9e9dc2ecbdd8fe1de123e9ed589
+class ComposerStaticInitf52dbfc0ad880279a70cf9c5f2ba4fc7
 {
     public static $files = array (
-        'e88992873b7765f9b5710cab95ba5dd7' => __DIR__ . '/..' . '/hoa/consistency/Prelude.php',
         '92c8763cd6170fce6fcfe7e26b4e8c10' => __DIR__ . '/..' . '/symfony/phpunit-bridge/bootstrap.php',
-        '3e76f7f02b41af8cea96018933f6b7e3' => __DIR__ . '/..' . '/hoa/protocol/Wrapper.php',
         '320cde22f66dd4f5d3fd621d3e88b98f' => __DIR__ . '/..' . '/symfony/polyfill-ctype/bootstrap.php',
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
         '2c102faa651ef8ea5874edb585946bce' => __DIR__ . '/..' . '/swiftmailer/swiftmailer/lib/swift_required.php',
@@ -18,23 +16,14 @@ class ComposerStaticInit835ad9e9dc2ecbdd8fe1de123e9ed589
         '6a47392539ca2329373e0d33e1dba053' => __DIR__ . '/..' . '/symfony/polyfill-intl-icu/bootstrap.php',
         'bd9634f2d41831496de0d3dfe4c94881' => __DIR__ . '/..' . '/symfony/polyfill-php56/bootstrap.php',
         '023d27dca8066ef29e6739335ea73bad' => __DIR__ . '/..' . '/symfony/polyfill-php70/bootstrap.php',
-        '0ccdf99b8f62f02c52cba55802e0c2e7' => __DIR__ . '/..' . '/zircote/swagger-php/src/functions.php',
         '20ac1a1363ed4458b981062525f65bae' => __DIR__ . '/..' . '/symfony/symfony/src/Symfony/Component/VarDumper/Resources/functions/dump.php',
     );
 
     public static $prefixLengthsPsr4 = array (
-        'p' => 
-        array (
-            'phpDocumentor\\Reflection\\' => 25,
-        ),
         'Z' => 
         array (
             'Zend\\EventManager\\' => 18,
             'Zend\\Code\\' => 10,
-        ),
-        'W' => 
-        array (
-            'Webmozart\\Assert\\' => 17,
         ),
         'T' => 
         array (
@@ -59,7 +48,6 @@ class ComposerStaticInit835ad9e9dc2ecbdd8fe1de123e9ed589
             'Symfony\\Bridge\\PhpUnit\\' => 23,
             'Symfony\\Bridge\\Monolog\\' => 23,
             'Symfony\\Bridge\\Doctrine\\' => 24,
-            'Swagger\\' => 8,
             'Sensio\\Bundle\\GeneratorBundle\\' => 30,
             'Sensio\\Bundle\\FrameworkExtraBundle\\' => 35,
             'Sensio\\Bundle\\DistributionBundle\\' => 33,
@@ -86,59 +74,32 @@ class ComposerStaticInit835ad9e9dc2ecbdd8fe1de123e9ed589
         ),
         'N' => 
         array (
-            'Nelmio\\ApiDocBundle\\' => 20,
             'Negotiation\\' => 12,
         ),
         'M' => 
         array (
             'Monolog\\' => 8,
-            'Metadata\\' => 9,
+            'Michelf\\' => 8,
         ),
         'J' => 
         array (
-            'JMS\\Serializer\\' => 15,
             'JMS\\SerializerBundle\\' => 21,
         ),
         'I' => 
         array (
             'Incenteev\\ParameterHandler\\' => 27,
         ),
-        'H' => 
-        array (
-            'Hoa\\Zformat\\' => 12,
-            'Hoa\\Visitor\\' => 12,
-            'Hoa\\Ustring\\' => 12,
-            'Hoa\\Stream\\' => 11,
-            'Hoa\\Regex\\' => 10,
-            'Hoa\\Protocol\\' => 13,
-            'Hoa\\Math\\' => 9,
-            'Hoa\\Iterator\\' => 13,
-            'Hoa\\File\\' => 9,
-            'Hoa\\Exception\\' => 14,
-            'Hoa\\Event\\' => 10,
-            'Hoa\\Consistency\\' => 16,
-            'Hoa\\Compiler\\' => 13,
-        ),
         'F' => 
         array (
             'Fig\\Link\\' => 9,
             'FOS\\UserBundle\\' => 15,
-            'FOS\\RestBundle\\' => 15,
             'FOS\\OAuthServerBundle\\' => 22,
-        ),
-        'E' => 
-        array (
-            'EXSyst\\Component\\Swagger\\' => 25,
         ),
         'D' => 
         array (
-            'Doctrine\\ORM\\' => 13,
-            'Doctrine\\Migrations\\' => 20,
             'Doctrine\\Instantiator\\' => 22,
             'Doctrine\\DBAL\\Migrations\\' => 25,
-            'Doctrine\\DBAL\\' => 14,
             'Doctrine\\Common\\Inflector\\' => 26,
-            'Doctrine\\Common\\Collections\\' => 28,
             'Doctrine\\Common\\Cache\\' => 22,
             'Doctrine\\Common\\Annotations\\' => 28,
             'Doctrine\\Common\\' => 16,
@@ -157,12 +118,6 @@ class ComposerStaticInit835ad9e9dc2ecbdd8fe1de123e9ed589
     );
 
     public static $prefixDirsPsr4 = array (
-        'phpDocumentor\\Reflection\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/phpdocumentor/reflection-common/src',
-            1 => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src',
-            2 => __DIR__ . '/..' . '/phpdocumentor/type-resolver/src',
-        ),
         'Zend\\EventManager\\' => 
         array (
             0 => __DIR__ . '/..' . '/zendframework/zend-eventmanager/src',
@@ -170,10 +125,6 @@ class ComposerStaticInit835ad9e9dc2ecbdd8fe1de123e9ed589
         'Zend\\Code\\' => 
         array (
             0 => __DIR__ . '/..' . '/zendframework/zend-code/src',
-        ),
-        'Webmozart\\Assert\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/webmozart/assert/src',
         ),
         'Twig\\' => 
         array (
@@ -247,10 +198,6 @@ class ComposerStaticInit835ad9e9dc2ecbdd8fe1de123e9ed589
         array (
             0 => __DIR__ . '/..' . '/symfony/symfony/src/Symfony/Bridge/Doctrine',
         ),
-        'Swagger\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/zircote/swagger-php/src',
-        ),
         'Sensio\\Bundle\\GeneratorBundle\\' => 
         array (
             0 => __DIR__ . '/..' . '/sensio/generator-bundle',
@@ -307,10 +254,6 @@ class ComposerStaticInit835ad9e9dc2ecbdd8fe1de123e9ed589
         array (
             0 => __DIR__ . '/..' . '/friendsofsymfony/oauth2-php/lib',
         ),
-        'Nelmio\\ApiDocBundle\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/nelmio/api-doc-bundle',
-        ),
         'Negotiation\\' => 
         array (
             0 => __DIR__ . '/..' . '/willdurand/negotiation/src/Negotiation',
@@ -319,13 +262,9 @@ class ComposerStaticInit835ad9e9dc2ecbdd8fe1de123e9ed589
         array (
             0 => __DIR__ . '/..' . '/monolog/monolog/src/Monolog',
         ),
-        'Metadata\\' => 
+        'Michelf\\' => 
         array (
-            0 => __DIR__ . '/..' . '/jms/metadata/src',
-        ),
-        'JMS\\Serializer\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/jms/serializer/src',
+            0 => __DIR__ . '/..' . '/michelf/php-markdown/Michelf',
         ),
         'JMS\\SerializerBundle\\' => 
         array (
@@ -335,58 +274,6 @@ class ComposerStaticInit835ad9e9dc2ecbdd8fe1de123e9ed589
         array (
             0 => __DIR__ . '/..' . '/incenteev/composer-parameter-handler',
         ),
-        'Hoa\\Zformat\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/hoa/zformat',
-        ),
-        'Hoa\\Visitor\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/hoa/visitor',
-        ),
-        'Hoa\\Ustring\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/hoa/ustring',
-        ),
-        'Hoa\\Stream\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/hoa/stream',
-        ),
-        'Hoa\\Regex\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/hoa/regex',
-        ),
-        'Hoa\\Protocol\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/hoa/protocol',
-        ),
-        'Hoa\\Math\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/hoa/math',
-        ),
-        'Hoa\\Iterator\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/hoa/iterator',
-        ),
-        'Hoa\\File\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/hoa/file',
-        ),
-        'Hoa\\Exception\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/hoa/exception',
-        ),
-        'Hoa\\Event\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/hoa/event',
-        ),
-        'Hoa\\Consistency\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/hoa/consistency',
-        ),
-        'Hoa\\Compiler\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/hoa/compiler',
-        ),
         'Fig\\Link\\' => 
         array (
             0 => __DIR__ . '/..' . '/fig/link-util/src',
@@ -395,25 +282,9 @@ class ComposerStaticInit835ad9e9dc2ecbdd8fe1de123e9ed589
         array (
             0 => __DIR__ . '/..' . '/friendsofsymfony/user-bundle',
         ),
-        'FOS\\RestBundle\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/friendsofsymfony/rest-bundle',
-        ),
         'FOS\\OAuthServerBundle\\' => 
         array (
             0 => __DIR__ . '/..' . '/friendsofsymfony/oauth-server-bundle',
-        ),
-        'EXSyst\\Component\\Swagger\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/exsyst/swagger/src',
-        ),
-        'Doctrine\\ORM\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/doctrine/orm/lib/Doctrine/ORM',
-        ),
-        'Doctrine\\Migrations\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/doctrine/migrations/lib/Doctrine/Migrations',
         ),
         'Doctrine\\Instantiator\\' => 
         array (
@@ -423,17 +294,9 @@ class ComposerStaticInit835ad9e9dc2ecbdd8fe1de123e9ed589
         array (
             0 => __DIR__ . '/..' . '/doctrine/migrations/lib/Doctrine/DBAL/Migrations',
         ),
-        'Doctrine\\DBAL\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/doctrine/dbal/lib/Doctrine/DBAL',
-        ),
         'Doctrine\\Common\\Inflector\\' => 
         array (
             0 => __DIR__ . '/..' . '/doctrine/inflector/lib/Doctrine/Common/Inflector',
-        ),
-        'Doctrine\\Common\\Collections\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/doctrine/collections/lib/Doctrine/Common/Collections',
         ),
         'Doctrine\\Common\\Cache\\' => 
         array (
@@ -446,9 +309,6 @@ class ComposerStaticInit835ad9e9dc2ecbdd8fe1de123e9ed589
         'Doctrine\\Common\\' => 
         array (
             0 => __DIR__ . '/..' . '/doctrine/common/lib/Doctrine/Common',
-            1 => __DIR__ . '/..' . '/doctrine/event-manager/lib/Doctrine/Common',
-            2 => __DIR__ . '/..' . '/doctrine/persistence/lib/Doctrine/Common',
-            3 => __DIR__ . '/..' . '/doctrine/reflection/lib/Doctrine/Common',
         ),
         'Doctrine\\Bundle\\MigrationsBundle\\' => 
         array (
@@ -486,6 +346,28 @@ class ComposerStaticInit835ad9e9dc2ecbdd8fe1de123e9ed589
             array (
                 0 => __DIR__ . '/..' . '/ocramius/proxy-manager/src',
             ),
+            'PhpOption\\' => 
+            array (
+                0 => __DIR__ . '/..' . '/phpoption/phpoption/src',
+            ),
+            'PhpCollection' => 
+            array (
+                0 => __DIR__ . '/..' . '/phpcollection/phpcollection/src',
+            ),
+        ),
+        'N' => 
+        array (
+            'Nelmio\\ApiDocBundle' => 
+            array (
+                0 => __DIR__ . '/..' . '/nelmio/api-doc-bundle',
+            ),
+        ),
+        'M' => 
+        array (
+            'Metadata\\' => 
+            array (
+                0 => __DIR__ . '/..' . '/jms/metadata/src',
+            ),
         ),
         'J' => 
         array (
@@ -493,12 +375,39 @@ class ComposerStaticInit835ad9e9dc2ecbdd8fe1de123e9ed589
             array (
                 0 => __DIR__ . '/..' . '/willdurand/jsonp-callback-validator/src',
             ),
+            'JMS\\Serializer' => 
+            array (
+                0 => __DIR__ . '/..' . '/jms/serializer/src',
+            ),
+            'JMS\\' => 
+            array (
+                0 => __DIR__ . '/..' . '/jms/parser-lib/src',
+            ),
+        ),
+        'F' => 
+        array (
+            'FOS\\RestBundle' => 
+            array (
+                0 => __DIR__ . '/..' . '/friendsofsymfony/rest-bundle',
+            ),
         ),
         'D' => 
         array (
+            'Doctrine\\ORM\\' => 
+            array (
+                0 => __DIR__ . '/..' . '/doctrine/orm/lib',
+            ),
+            'Doctrine\\DBAL\\' => 
+            array (
+                0 => __DIR__ . '/..' . '/doctrine/dbal/lib',
+            ),
             'Doctrine\\Common\\Lexer\\' => 
             array (
                 0 => __DIR__ . '/..' . '/doctrine/lexer/lib',
+            ),
+            'Doctrine\\Common\\Collections\\' => 
+            array (
+                0 => __DIR__ . '/..' . '/doctrine/collections/lib',
             ),
         ),
     );
@@ -523,10 +432,10 @@ class ComposerStaticInit835ad9e9dc2ecbdd8fe1de123e9ed589
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit835ad9e9dc2ecbdd8fe1de123e9ed589::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit835ad9e9dc2ecbdd8fe1de123e9ed589::$prefixDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInit835ad9e9dc2ecbdd8fe1de123e9ed589::$prefixesPsr0;
-            $loader->classMap = ComposerStaticInit835ad9e9dc2ecbdd8fe1de123e9ed589::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInitf52dbfc0ad880279a70cf9c5f2ba4fc7::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInitf52dbfc0ad880279a70cf9c5f2ba4fc7::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInitf52dbfc0ad880279a70cf9c5f2ba4fc7::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInitf52dbfc0ad880279a70cf9c5f2ba4fc7::$classMap;
 
         }, null, ClassLoader::class);
     }

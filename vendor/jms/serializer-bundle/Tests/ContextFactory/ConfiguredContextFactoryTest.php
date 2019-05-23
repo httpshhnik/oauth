@@ -3,7 +3,6 @@
 namespace JMS\SerializerBundle\Tests\ContextFactory;
 
 use JMS\Serializer\Context;
-use JMS\Serializer\SerializationContext;
 use JMS\SerializerBundle\ContextFactory\ConfiguredContextFactory;
 use PHPUnit\Framework\TestCase;
 
@@ -48,15 +47,26 @@ class ConfiguredContextFactoryTest extends TestCase
         $context = $object->$factoryMethod();
         /** @var Context $context */
         $this->assertInstanceOf($expectedContextClass, $context);
-        if ($context instanceof SerializationContext) {
-            $this->assertSame($serializeNulls, $context->shouldSerializeNull());
-        }
+        $this->assertSame($serializeNulls, $context->shouldSerializeNull());
 
-        $this->assertSame($version, $context->getAttribute('version'));
-        $this->assertSame($groups, $context->getAttribute('groups'));
+        $this->assertSame($version, $context->attributes->get('version')->get());
+        $this->assertSame($groups, $context->attributes->get('groups')->get());
         foreach ($attributes as $k => $v) {
-            $this->assertSame($v, $context->getAttribute($k));
+            $this->assertSame($v, $context->attributes->get($k)->get());
         }
+    }
+
+    public function testMaxDepthExclusionStrategy()
+    {
+        $object = new ConfiguredContextFactory();
+
+        $object->enableMaxDepthChecks();
+
+        $context = $object->createDeserializationContext();
+        $this->assertInstanceOf('JMS\Serializer\Exclusion\DepthExclusionStrategy', $context->getExclusionStrategy());
+
+        $context = $object->createDeserializationContext();
+        $this->assertInstanceOf('JMS\Serializer\Exclusion\DepthExclusionStrategy', $context->getExclusionStrategy());
     }
 
     public function contextConfigDataProvider()

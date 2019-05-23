@@ -22,7 +22,7 @@ class RegisterEventListenersAndSubscribersPass implements CompilerPassInterface
                 }
 
                 $class = isset($attributes['class'])
-                    ? $container->getParameterBag()->resolveValue($attributes['class'])
+                    ? strtolower($container->getParameterBag()->resolveValue($attributes['class']))
                     : null;
 
                 $format = isset($attributes['format']) ? $attributes['format'] : null;
@@ -52,17 +52,16 @@ class RegisterEventListenersAndSubscribersPass implements CompilerPassInterface
                     throw new \RuntimeException(sprintf('The service "%s" (class: %s) must return an event for each subscribed event.', $id, $subscriberClass));
                 }
 
-                $class = isset($eventData['class']) ? $eventData['class'] : null;
+                $class = isset($eventData['class']) ? strtolower($eventData['class']) : null;
                 $format = isset($eventData['format']) ? $eventData['format'] : null;
                 $method = isset($eventData['method']) ? $eventData['method'] : EventDispatcher::getDefaultMethodName($eventData['event']);
                 $priority = isset($eventData['priority']) ? (integer)$eventData['priority'] : 0;
-                $interface = isset($eventData['interface']) ? $eventData['interface'] : null;
 
                 if (class_exists(ServiceLocatorTagPass::class) || $container->getDefinition($id)->isPublic()) {
                     $listenerServices[$id] = new Reference($id);
-                    $listeners[$eventData['event']][$priority][] = array(array($id, $method), $class, $format, $interface);
+                    $listeners[$eventData['event']][$priority][] = array(array($id, $method), $class, $format);
                 } else {
-                    $listeners[$eventData['event']][$priority][] = array(array(new Reference($id), $method), $class, $format, $interface);
+                    $listeners[$eventData['event']][$priority][] = array(array(new Reference($id), $method), $class, $format);
                 }
             }
         }

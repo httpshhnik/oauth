@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace JMS\Serializer\Tests\Fixtures;
 
 use JMS\Serializer\Annotation\Accessor;
@@ -17,7 +15,7 @@ class IndexedCommentsBlogPost
      * @XmlMap(keyAttribute="author-name", inline=true, entry="comments")
      * @Accessor(getter="getCommentsIndexedByAuthor")
      */
-    private $comments = [];
+    private $comments = array();
 
     public function __construct()
     {
@@ -28,7 +26,7 @@ class IndexedCommentsBlogPost
 
     public function getCommentsIndexedByAuthor()
     {
-        $indexedComments = [];
+        $indexedComments = array();
         foreach ($this->comments as $comment) {
             $authorName = $comment->getAuthor()->getName();
 
@@ -46,7 +44,7 @@ class IndexedCommentsBlogPost
 class IndexedCommentsList
 {
     /** @XmlList(inline=true, entry="comment") */
-    private $comments = [];
+    private $comments = array();
 
     /** @XmlAttribute */
     private $count = 0;

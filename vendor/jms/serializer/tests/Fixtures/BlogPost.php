@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace JMS\Serializer\Tests\Fixtures;
 
 use Doctrine\Common\Collections\ArrayCollection;
@@ -14,6 +12,8 @@ use JMS\Serializer\Annotation\XmlList;
 use JMS\Serializer\Annotation\XmlMap;
 use JMS\Serializer\Annotation\XmlNamespace;
 use JMS\Serializer\Annotation\XmlRoot;
+use PhpCollection\Map;
+use PhpCollection\Sequence;
 
 /**
  * @XmlRoot("blog-post")
@@ -75,14 +75,14 @@ class BlogPost
     private $comments;
 
     /**
-     * @Type("array<JMS\Serializer\Tests\Fixtures\Comment>")
+     * @Type("PhpCollection\Sequence<JMS\Serializer\Tests\Fixtures\Comment>")
      * @XmlList(inline=true, entry="comment2")
      * @Groups({"comments"})
      */
     private $comments2;
 
     /**
-     * @Type("array<string,string>")
+     * @Type("PhpCollection\Map<string,string>")
      * @XmlMap(keyAttribute = "key")
      */
     private $metadata;
@@ -113,10 +113,11 @@ class BlogPost
         $this->published = false;
         $this->reviewed = false;
         $this->comments = new ArrayCollection();
-        $this->comments2 = [];
-        $this->metadata = ['foo' => 'bar'];
+        $this->comments2 = new Sequence();
+        $this->metadata = new Map();
+        $this->metadata->set('foo', 'bar');
         $this->createdAt = $createdAt;
-        $this->etag = sha1($this->createdAt->format(\DateTime::ATOM));
+        $this->etag = sha1($this->createdAt->format(\DateTime::ISO8601));
     }
 
     public function setPublished()
@@ -132,7 +133,7 @@ class BlogPost
     public function addComment(Comment $comment)
     {
         $this->comments->add($comment);
-        $this->comments2[] = $comment;
+        $this->comments2->add($comment);
     }
 
     public function addTag(Tag $tag)

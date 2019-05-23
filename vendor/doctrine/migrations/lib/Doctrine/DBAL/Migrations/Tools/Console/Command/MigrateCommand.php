@@ -1,10 +1,26 @@
 <?php
+/*
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+ * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+ * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+ * A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+ * OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+ * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+ * DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+ * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+ * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+ * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
+ * This software consists of voluntary contributions made by many individuals
+ * and is licensed under the LGPL. For more information, see
+ * <http://www.doctrine-project.org>.
+ */
 
 namespace Doctrine\DBAL\Migrations\Tools\Console\Command;
 
 use Doctrine\DBAL\Migrations\Configuration\Configuration;
 use Doctrine\DBAL\Migrations\Migration;
-use Symfony\Component\Console\Formatter\OutputFormatter;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Input\InputArgument;
@@ -26,7 +42,7 @@ class MigrateCommand extends AbstractCommand
             ->setName('migrations:migrate')
             ->setDescription('Execute a migration to a specified version or the latest available version.')
             ->addArgument('version', InputArgument::OPTIONAL, 'The version number (YYYYMMDDHHMMSS) or alias (first, prev, next, latest) to migrate to.', 'latest')
-            ->addOption('write-sql', null, InputOption::VALUE_OPTIONAL, 'The path to output the migration SQL file instead of executing it. Default to current working directory.')
+            ->addOption('write-sql', null, InputOption::VALUE_NONE, 'The path to output the migration SQL file instead of executing it.')
             ->addOption('dry-run', null, InputOption::VALUE_NONE, 'Execute the migration as a dry run.')
             ->addOption('query-time', null, InputOption::VALUE_NONE, 'Time all the queries individually.')
             ->addOption('allow-no-migration', null, InputOption::VALUE_NONE, 'Don\'t throw an exception if no migration is available (CI).')
@@ -42,11 +58,6 @@ You can optionally manually specify the version you wish to migrate to:
 You can specify the version you wish to migrate to using an alias:
 
     <info>%command.full_name% prev</info>
-    <info>These alias are defined : first, latest, prev, current and next</info>
-
-You can specify the version you wish to migrate to using an number against the current version:
-
-    <info>%command.full_name% current+3</info>
 
 You can also execute the migration as a <comment>--dry-run</comment>:
 
@@ -72,16 +83,13 @@ EOT
     public function execute(InputInterface $input, OutputInterface $output)
     {
         $configuration = $this->getMigrationConfiguration($input, $output);
-        $migration     = $this->createMigration($configuration);
+        $migration = $this->createMigration($configuration);
 
         $this->outputHeader($configuration, $output);
 
         $timeAllqueries = $input->getOption('query-time');
 
-        $dryRun = (boolean) $input->getOption('dry-run');
-        $configuration->setIsDryRun($dryRun);
-
-        $executedMigrations  = $configuration->getMigratedVersions();
+        $executedMigrations = $configuration->getMigratedVersions();
         $availableMigrations = $configuration->getAvailableVersions();
 
         $version = $this->getVersionNameFromAlias($input->getArgument('version'), $output, $configuration);
@@ -90,7 +98,7 @@ EOT
         }
 
         $executedUnavailableMigrations = array_diff($executedMigrations, $availableMigrations);
-        if ( ! empty($executedUnavailableMigrations)) {
+        if (!empty($executedUnavailableMigrations)) {
             $output->writeln(sprintf(
                 '<error>WARNING! You have %s previously executed migrations'
                 . ' in the database that are not registered migrations.</error>',
@@ -106,7 +114,7 @@ EOT
             }
 
             $question = 'Are you sure you wish to continue? (y/n)';
-            if ( ! $this->canExecute($question, $input, $output)) {
+            if (! $this->canExecute($question, $input, $output)) {
                 $output->writeln('<error>Migration cancelled!</error>');
 
                 return 1;
@@ -119,14 +127,16 @@ EOT
             return 0;
         }
 
+        $dryRun = (boolean) $input->getOption('dry-run');
+
         $cancelled = false;
         $migration->setNoMigrationException($input->getOption('allow-no-migration'));
         $result = $migration->migrate($version, $dryRun, $timeAllqueries, function () use ($input, $output, &$cancelled) {
-            $question    = 'WARNING! You are about to execute a database migration'
-                . ' that could result in schema changes and data loss.'
+            $question = 'WARNING! You are about to execute a database migration'
+                . ' that could result in schema changes and data lost.'
                 . ' Are you sure you wish to continue? (y/n)';
             $canContinue = $this->canExecute($question, $input, $output);
-            $cancelled   = ! $canContinue;
+            $cancelled = !$canContinue;
 
             return $canContinue;
         });
@@ -140,7 +150,7 @@ EOT
     /**
      * Create a new migration instance to execute the migrations.
      *
-     * @param Configuration $configuration The configuration with which the migrations will be executed
+     * @param $configuration The configuration with which the migrations will be executed
      * @return Migration a new migration instance
      */
     protected function createMigration(Configuration $configuration)
@@ -181,14 +191,10 @@ EOT
                 $output->writeln('<error>Already at latest version.</error>');
                 return false;
             }
-            if (substr($versionAlias, 0, 7) == 'current') {
-                $output->writeln('<error>The delta couldn\'t be reached.</error>');
-                return false;
-            }
 
             $output->writeln(sprintf(
                 '<error>Unknown version: %s</error>',
-                OutputFormatter::escape($versionAlias)
+                $output->getFormatter()->escape($versionAlias)
             ));
             return false;
         }

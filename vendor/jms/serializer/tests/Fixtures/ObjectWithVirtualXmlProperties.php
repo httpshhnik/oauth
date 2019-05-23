@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace JMS\Serializer\Tests\Fixtures;
 
 use JMS\Serializer\Annotation\Groups;
@@ -16,7 +14,9 @@ use JMS\Serializer\Annotation\XmlValue;
 
 class ObjectWithVirtualXmlProperties
 {
+
     /**
+     *
      * @VirtualProperty
      * @SerializedName("foo")
      * @Groups({"attributes"})
@@ -28,6 +28,7 @@ class ObjectWithVirtualXmlProperties
     }
 
     /**
+     *
      * @VirtualProperty
      * @SerializedName("xml-value")
      * @Groups({"values"})
@@ -39,6 +40,7 @@ class ObjectWithVirtualXmlProperties
     }
 
     /**
+     *
      * @VirtualProperty
      * @SerializedName("list")
      * @Groups({"list"})
@@ -46,10 +48,11 @@ class ObjectWithVirtualXmlProperties
      */
     public function getVirualXmlList()
     {
-        return ['One', 'Two'];
+        return array('One', 'Two');
     }
 
     /**
+     *
      * @VirtualProperty
      * @SerializedName("map")
      * @Groups({"map"})
@@ -57,13 +60,14 @@ class ObjectWithVirtualXmlProperties
      */
     public function getVirualXmlMap()
     {
-        return [
+        return array(
             'key-one' => 'One',
-            'key-two' => 'Two',
-        ];
+            'key-two' => 'Two'
+        );
     }
 
     /**
+     *
      * @VirtualProperty
      * @SerializedName("low")
      * @Groups({"versions"})
@@ -84,4 +88,5 @@ class ObjectWithVirtualXmlProperties
     {
         return 8;
     }
+
 }

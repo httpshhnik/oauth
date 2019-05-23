@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace JMS\Serializer\Tests\Fixtures;
 
 use JMS\Serializer\Annotation\Type;
@@ -23,7 +21,7 @@ class ObjectWithXmlNamespacesAndObjectPropertyAuthor
      * @Type("string")
      * @XmlElement(namespace="http://example.com/namespace-author");
      */
-    private $info = 'hidden-info';
+    private $info = "hidden-info";
 
     /**
      * @Type("string")

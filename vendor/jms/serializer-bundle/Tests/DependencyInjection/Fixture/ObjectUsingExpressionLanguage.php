@@ -4,9 +4,6 @@ namespace JMS\SerializerBundle\Tests\DependencyInjection\Fixture;
 
 use JMS\Serializer\Annotation as Serializer;
 
-/**
- * @Serializer\VirtualProperty(exp="parameter('foo')", name="virtual")
- */
 class ObjectUsingExpressionLanguage
 {
     /**

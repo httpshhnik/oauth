@@ -88,7 +88,7 @@ class ConfiguredContextFactory implements SerializationContextFactoryInterface, 
     /**
      * @inheritDoc
      */
-    public function createDeserializationContext(): DeserializationContext
+    public function createDeserializationContext()
     {
         return $this->configureContext(new DeserializationContext());
     }
@@ -96,7 +96,7 @@ class ConfiguredContextFactory implements SerializationContextFactoryInterface, 
     /**
      * @inheritDoc
      */
-    public function createSerializationContext(): SerializationContext
+    public function createSerializationContext()
     {
         return $this->configureContext(new SerializationContext());
     }
@@ -116,8 +116,7 @@ class ConfiguredContextFactory implements SerializationContextFactoryInterface, 
         if (!empty($this->groups)) {
             $context->setGroups($this->groups);
         }
-
-        if (($context instanceof SerializationContext) && $this->serializeNulls !== null) {
+        if ($this->serializeNulls !== null) {
             $context->setSerializeNull($this->serializeNulls);
         }
 

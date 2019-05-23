@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace JMS\Serializer\Tests\Fixtures;
 
 use JMS\Serializer\Annotation\Type;
@@ -11,7 +9,7 @@ use JMS\Serializer\Annotation\XmlNamespace;
 use JMS\Serializer\Annotation\XmlRoot;
 
 /**
- * @XmlRoot("test-object", namespace="http://example.com/namespace", prefix="ex")
+ * @XmlRoot("test-object", namespace="http://example.com/namespace")
  * @XmlNamespace(uri="http://example.com/namespace")
  * @XmlNamespace(uri="http://schemas.google.com/g/2005", prefix="gd")
  * @XmlNamespace(uri="http://www.w3.org/2005/Atom", prefix="atom")
@@ -54,6 +52,6 @@ class ObjectWithXmlNamespaces
         $this->author = $author;
         $this->createdAt = $createdAt;
         $this->language = $language;
-        $this->etag = sha1($this->createdAt->format(\DateTime::ATOM));
+        $this->etag = sha1($this->createdAt->format(\DateTime::ISO8601));
     }
 }

@@ -1,10 +1,9 @@
 <?php
 
-declare(strict_types=1);
-
 namespace JMS\Serializer\Tests\Fixtures;
 
 use JMS\Serializer\Annotation\Type;
+
 
 class ObjectWithObjectProperty
 {
@@ -27,10 +26,12 @@ class ObjectWithObjectProperty
     }
 
     /**
-     * @return Author
+     * @return \JMS\Serializer\Tests\Fixtures\Author
      */
     public function getAuthor()
     {
         return $this->author;
     }
+
+
 }

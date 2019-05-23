@@ -1,10 +1,9 @@
 <?php
 
-declare(strict_types=1);
-
 namespace JMS\Serializer\Tests\Fixtures;
 
 use JMS\Serializer\Annotation\Type;
+
 
 class DateTimeArraysObject
 {
@@ -20,7 +19,8 @@ class DateTimeArraysObject
      */
     private $arrayWithFormattedDateTime;
 
-    public function __construct($arrayWithDefaultDateTime, $arrayWithFormattedDateTime)
+
+    function __construct($arrayWithDefaultDateTime, $arrayWithFormattedDateTime)
     {
         $this->arrayWithDefaultDateTime = $arrayWithDefaultDateTime;
         $this->arrayWithFormattedDateTime = $arrayWithFormattedDateTime;
@@ -41,4 +41,5 @@ class DateTimeArraysObject
     {
         return $this->arrayWithFormattedDateTime;
     }
+
 }

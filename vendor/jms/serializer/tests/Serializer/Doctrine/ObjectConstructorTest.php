@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace JMS\Serializer\Tests\Serializer\Doctrine;
 
 use Doctrine\Common\Annotations\AnnotationReader;
@@ -10,7 +8,6 @@ use Doctrine\Common\Persistence\AbstractManagerRegistry;
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\DriverManager;
-use Doctrine\DBAL\Types\Type;
 use Doctrine\ORM\Configuration;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Mapping\Driver\AnnotationDriver;
@@ -25,17 +22,14 @@ use JMS\Serializer\Construction\UnserializeObjectConstructor;
 use JMS\Serializer\DeserializationContext;
 use JMS\Serializer\Metadata\ClassMetadata;
 use JMS\Serializer\Metadata\Driver\DoctrineTypeDriver;
-use JMS\Serializer\Naming\IdenticalPropertyNamingStrategy;
 use JMS\Serializer\Serializer;
 use JMS\Serializer\SerializerBuilder;
-use JMS\Serializer\SerializerInterface;
 use JMS\Serializer\Tests\Fixtures\Doctrine\Author;
 use JMS\Serializer\Tests\Fixtures\Doctrine\IdentityFields\Server;
-use JMS\Serializer\Tests\Fixtures\DoctrinePHPCR\Author as DoctrinePHPCRAuthor;
-use JMS\Serializer\Visitor\DeserializationVisitorInterface;
-use PHPUnit\Framework\TestCase;
+use JMS\Serializer\Tests\Fixtures\Doctrine\SingleTableInheritance\Excursion;
+use JMS\Serializer\VisitorInterface;
 
-class ObjectConstructorTest extends TestCase
+class ObjectConstructorTest extends \PHPUnit_Framework_TestCase
 {
     /** @var ManagerRegistry */
     private $registry;
@@ -43,7 +37,7 @@ class ObjectConstructorTest extends TestCase
     /** @var Serializer */
     private $serializer;
 
-    /** @var DeserializationVisitorInterface */
+    /** @var VisitorInterface */
     private $visitor;
 
     /** @var DeserializationContext */
@@ -60,13 +54,13 @@ class ObjectConstructorTest extends TestCase
 
         $fallback = $this->getMockBuilder(ObjectConstructorInterface::class)->getMock();
 
-        $type = ['name' => Author::class, 'params' => []];
+        $type = array('name' => Author::class, 'params' => array());
         $class = new ClassMetadata(Author::class);
 
         $constructor = new DoctrineObjectConstructor($this->registry, $fallback);
         $authorFetched = $constructor->construct($this->visitor, $class, ['id' => 5], $type, $this->context);
 
-        self::assertEquals($author, $authorFetched);
+        $this->assertEquals($author, $authorFetched);
     }
 
     public function testFindManagedEntity()
@@ -79,25 +73,25 @@ class ObjectConstructorTest extends TestCase
 
         $fallback = $this->getMockBuilder(ObjectConstructorInterface::class)->getMock();
 
-        $type = ['name' => Author::class, 'params' => []];
+        $type = array('name' => Author::class, 'params' => array());
         $class = new ClassMetadata(Author::class);
 
         $constructor = new DoctrineObjectConstructor($this->registry, $fallback);
         $authorFetched = $constructor->construct($this->visitor, $class, ['id' => 5], $type, $this->context);
 
-        self::assertSame($author, $authorFetched);
+        $this->assertSame($author, $authorFetched);
     }
 
     public function testMissingAuthor()
     {
         $fallback = $this->getMockBuilder(ObjectConstructorInterface::class)->getMock();
 
-        $type = ['name' => Author::class, 'params' => []];
+        $type = array('name' => Author::class, 'params' => array());
         $class = new ClassMetadata(Author::class);
 
         $constructor = new DoctrineObjectConstructor($this->registry, $fallback);
         $author = $constructor->construct($this->visitor, $class, ['id' => 5], $type, $this->context);
-        self::assertNull($author);
+        $this->assertNull($author);
     }
 
     public function testMissingAuthorFallback()
@@ -107,27 +101,27 @@ class ObjectConstructorTest extends TestCase
         $fallback = $this->getMockBuilder(ObjectConstructorInterface::class)->getMock();
         $fallback->expects($this->once())->method('construct')->willReturn($author);
 
-        $type = ['name' => Author::class, 'params' => []];
+        $type = array('name' => Author::class, 'params' => array());
         $class = new ClassMetadata(Author::class);
 
         $constructor = new DoctrineObjectConstructor($this->registry, $fallback, DoctrineObjectConstructor::ON_MISSING_FALLBACK);
         $authorFetched = $constructor->construct($this->visitor, $class, ['id' => 5], $type, $this->context);
-        self::assertSame($author, $authorFetched);
+        $this->assertSame($author, $authorFetched);
     }
 
     public function testMissingNotManaged()
     {
-        $author = new DoctrinePHPCRAuthor('foo');
+        $author = new \JMS\Serializer\Tests\Fixtures\DoctrinePHPCR\Author('foo');
 
         $fallback = $this->getMockBuilder(ObjectConstructorInterface::class)->getMock();
         $fallback->expects($this->once())->method('construct')->willReturn($author);
 
-        $type = ['name' => Author::class, 'params' => []];
+        $type = array('name' => Author::class, 'params' => array());
         $class = new ClassMetadata(Author::class);
 
         $constructor = new DoctrineObjectConstructor($this->registry, $fallback, DoctrineObjectConstructor::ON_MISSING_FALLBACK);
         $authorFetched = $constructor->construct($this->visitor, $class, ['id' => 5], $type, $this->context);
-        self::assertSame($author, $authorFetched);
+        $this->assertSame($author, $authorFetched);
     }
 
     public function testReference()
@@ -140,12 +134,12 @@ class ObjectConstructorTest extends TestCase
 
         $fallback = $this->getMockBuilder(ObjectConstructorInterface::class)->getMock();
 
-        $type = ['name' => Author::class, 'params' => []];
+        $type = array('name' => Author::class, 'params' => array());
         $class = new ClassMetadata(Author::class);
 
         $constructor = new DoctrineObjectConstructor($this->registry, $fallback, DoctrineObjectConstructor::ON_MISSING_FALLBACK);
         $authorFetched = $constructor->construct($this->visitor, $class, 5, $type, $this->context);
-        self::assertSame($author, $authorFetched);
+        $this->assertSame($author, $authorFetched);
     }
 
     /**
@@ -155,7 +149,7 @@ class ObjectConstructorTest extends TestCase
     {
         $fallback = $this->getMockBuilder(ObjectConstructorInterface::class)->getMock();
 
-        $type = ['name' => Author::class, 'params' => []];
+        $type = array('name' => Author::class, 'params' => array());
         $class = new ClassMetadata(Author::class);
 
         $constructor = new DoctrineObjectConstructor($this->registry, $fallback, DoctrineObjectConstructor::ON_MISSING_EXCEPTION);
@@ -169,7 +163,7 @@ class ObjectConstructorTest extends TestCase
     {
         $fallback = $this->getMockBuilder(ObjectConstructorInterface::class)->getMock();
 
-        $type = ['name' => Author::class, 'params' => []];
+        $type = array('name' => Author::class, 'params' => array());
         $class = new ClassMetadata(Author::class);
 
         $constructor = new DoctrineObjectConstructor($this->registry, $fallback, 'foo');
@@ -183,12 +177,12 @@ class ObjectConstructorTest extends TestCase
         $fallback = $this->getMockBuilder(ObjectConstructorInterface::class)->getMock();
         $fallback->expects($this->once())->method('construct')->willReturn($author);
 
-        $type = ['name' => Author::class, 'params' => []];
+        $type = array('name' => Author::class, 'params' => array());
         $class = new ClassMetadata(Author::class);
 
         $constructor = new DoctrineObjectConstructor($this->registry, $fallback, 'foo');
         $authorFetched = $constructor->construct($this->visitor, $class, ['foo' => 5], $type, $this->context);
-        self::assertSame($author, $authorFetched);
+        $this->assertSame($author, $authorFetched);
     }
 
     public function testNamingForIdentifierColumnIsConsidered()
@@ -214,14 +208,14 @@ class ObjectConstructorTest extends TestCase
 
     protected function setUp()
     {
-        $this->visitor = $this->getMockBuilder(DeserializationVisitorInterface::class)->getMock();
+        $this->visitor = $this->getMockBuilder('JMS\Serializer\VisitorInterface')->getMock();
         $this->context = $this->getMockBuilder('JMS\Serializer\DeserializationContext')->getMock();
 
         $connection = $this->createConnection();
         $entityManager = $this->createEntityManager($connection);
 
         $this->registry = $registry = new SimpleBaseManagerRegistry(
-            static function ($id) use ($connection, $entityManager) {
+            function ($id) use ($connection, $entityManager) {
                 switch ($id) {
                     case 'default_connection':
                         return $connection;
@@ -237,8 +231,8 @@ class ObjectConstructorTest extends TestCase
 
         $this->serializer = SerializerBuilder::create()
             ->setMetadataDriverFactory(new CallbackDriverFactory(
-                static function (array $metadataDirs, Reader $annotationReader) use ($registry) {
-                    $defaultFactory = new DefaultDriverFactory(new IdenticalPropertyNamingStrategy());
+                function (array $metadataDirs, Reader $annotationReader) use ($registry) {
+                    $defaultFactory = new DefaultDriverFactory();
 
                     return new DoctrineTypeDriver($defaultFactory->createDriver($metadataDirs, $annotationReader), $registry);
                 }
@@ -259,27 +253,31 @@ class ObjectConstructorTest extends TestCase
 
     private function createConnection()
     {
-        return DriverManager::getConnection([
+        $con = DriverManager::getConnection(array(
             'driver' => 'pdo_sqlite',
             'memory' => true,
-        ]);
+        ));
+
+        return $con;
     }
 
     private function createEntityManager(Connection $con)
     {
         $cfg = new Configuration();
-        $cfg->setMetadataDriverImpl(new AnnotationDriver(new AnnotationReader(), [
+        $cfg->setMetadataDriverImpl(new AnnotationDriver(new AnnotationReader(), array(
             __DIR__ . '/../../Fixtures/Doctrine',
-        ]));
+        )));
         $cfg->setAutoGenerateProxyClasses(true);
         $cfg->setProxyNamespace('JMS\Serializer\DoctrineProxy');
         $cfg->setProxyDir(sys_get_temp_dir() . '/serializer-test-proxies');
 
-        return EntityManager::create($con, $cfg);
+        $em = EntityManager::create($con, $cfg);
+
+        return $em;
     }
 
     /**
-     * @return SerializerInterface
+     * @return \JMS\Serializer\SerializerInterface
      */
     private function createSerializerWithDoctrineObjectConstructor()
     {
@@ -296,15 +294,15 @@ class ObjectConstructorTest extends TestCase
     }
 }
 
-Type::addType('Author', 'Doctrine\DBAL\Types\StringType');
-Type::addType('some_custom_type', 'Doctrine\DBAL\Types\StringType');
+\Doctrine\DBAL\Types\Type::addType('Author', 'Doctrine\DBAL\Types\StringType');
+\Doctrine\DBAL\Types\Type::addType('some_custom_type', 'Doctrine\DBAL\Types\StringType');
 
 class SimpleBaseManagerRegistry extends AbstractManagerRegistry
 {
-    private $services = [];
+    private $services = array();
     private $serviceCreator;
 
-    public function __construct($serviceCreator, $name = 'anonymous', array $connections = ['default' => 'default_connection'], array $managers = ['default' => 'default_manager'], $defaultConnection = null, $defaultManager = null, $proxyInterface = 'Doctrine\Common\Persistence\Proxy')
+    public function __construct($serviceCreator, $name = 'anonymous', array $connections = array('default' => 'default_connection'), array $managers = array('default' => 'default_manager'), $defaultConnection = null, $defaultManager = null, $proxyInterface = 'Doctrine\Common\Persistence\Proxy')
     {
         if (null === $defaultConnection) {
             $defaultConnection = key($connections);

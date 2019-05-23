@@ -119,6 +119,7 @@ class Configuration implements ConfigurationInterface
                     ->scalarNode('id')->cannotBeEmpty()->end()
                     ->scalarNode('separator')->defaultValue('_')->end()
                     ->booleanNode('lower_case')->defaultTrue()->end()
+                    ->booleanNode('enable_cache')->defaultTrue()->end()
                 ->end()
             ->end()
             ->arrayNode('expression_evaluator')
@@ -140,7 +141,7 @@ class Configuration implements ConfigurationInterface
                         ->validate()
                             ->always(function($v) {
                                 if (!empty($v) && !interface_exists('Symfony\Component\ExpressionLanguage\ExpressionFunctionProviderInterface')) {
-                                    throw new InvalidArgumentException('You need at least symfony/expression-language v2.6 or v3.0 to use the expression evaluator features');
+                                    throw new InvalidArgumentException('You need at least symfony/expression language v2.6 or v3.0 to use the expression evaluator features');
                                 }
                                 return $v;
                             })
@@ -204,104 +205,65 @@ class Configuration implements ConfigurationInterface
 
     private function addVisitorsSection(NodeBuilder $builder)
     {
-        $arrayNormalization = function($v) {
-            $options = 0;
-            foreach ($v as $option) {
-                if (is_numeric($option)) {
-                    $options |= (int) $option;
-                } elseif (defined($option)) {
-                    $options |= constant($option);
-                } else {
-                    throw new InvalidArgumentException('Expected either an integer representing one of the JSON_ constants, or a string of the constant itself.');
-                }
-            }
-
-            return $options;
-        };
-        $stringNormalization = function($v) {
-            if (is_numeric($v)) {
-                $value = (int) $v;
-            } elseif (defined($v)) {
-                $value = constant($v);
-            } else {
-                throw new InvalidArgumentException('Expected either an integer representing one of the JSON_ constants, or a string of the constant itself.');
-            }
-
-            return $value;
-        };
-        $jsonValidation = function($v) {
-            if (!is_int($v)) {
-                throw new InvalidArgumentException('Expected either integer value or a array of the JSON_ constants.');
-            }
-
-            return $v;
-        };
-
         $builder
             ->arrayNode('visitors')
                 ->addDefaultsIfNotSet()
                 ->children()
-                    ->arrayNode('json_serialization')
-                        ->addDefaultsIfNotSet()
-                        ->children()
-                            ->scalarNode("depth")->end()
-                            ->scalarNode('options')
-                                ->defaultValue(0)
-                                ->beforeNormalization()
-                                    ->ifArray()->then($arrayNormalization)
-                                ->end()
-                                ->beforeNormalization()
-                                    ->ifString()->then($stringNormalization)
-                                ->end()
-                                ->validate()
-                                    ->always($jsonValidation)
-                                ->end()
-                            ->end()
-                        ->end()
-                    ->end()
-                    ->arrayNode('json_deserialization')
+                    ->arrayNode('json')
                         ->addDefaultsIfNotSet()
                         ->children()
                             ->scalarNode('options')
                                 ->defaultValue(0)
                                 ->beforeNormalization()
-                                    ->ifArray()->then($arrayNormalization)
+                                    ->ifArray()->then(function($v) {
+                                        $options = 0;
+                                        foreach ($v as $option) {
+                                            if (is_numeric($option)) {
+                                                $options |= (int) $option;
+                                            } elseif (defined($option)) {
+                                                $options |= constant($option);
+                                            } else {
+                                                throw new InvalidArgumentException('Expected either an integer representing one of the JSON_ constants, or a string of the constant itself.');
+                                            }
+                                        }
+
+                                        return $options;
+                                    })
                                 ->end()
                                 ->beforeNormalization()
-                                    ->ifString()->then($stringNormalization)
+                                    ->ifString()->then(function($v) {
+                                        if (is_numeric($v)) {
+                                            $value = (int) $v;
+                                        } elseif (defined($v)) {
+                                            $value = constant($v);
+                                        } else {
+                                            throw new InvalidArgumentException('Expected either an integer representing one of the JSON_ constants, or a string of the constant itself.');
+                                        }
+
+                                        return $value;
+                                    })
                                 ->end()
                                 ->validate()
-                                    ->always($jsonValidation)
+                                    ->always(function($v) {
+                                        if (!is_int($v)) {
+                                            throw new InvalidArgumentException('Expected either integer value or a array of the JSON_ constants.');
+                                        }
+
+                                        return $v;
+                                    })
                                 ->end()
                             ->end()
                         ->end()
                     ->end()
-                    ->arrayNode('xml_serialization')
-                        ->fixXmlConfig('whitelisted-doctype', 'doctype_whitelist')
-                        ->addDefaultsIfNotSet()
-                        ->children()
-                            ->booleanNode('version')
-                            ->end()
-                            ->scalarNode('encoding')
-                            ->end()
-                            ->booleanNode('format_output')
-                                ->defaultFalse()
-                            ->end()
-                            ->scalarNode('default_root_name')
-                            ->end()
-                            ->scalarNode('default_root_ns')
-                            ->end()
-                        ->end()
-                    ->end()
-                    ->arrayNode('xml_deserialization')
+                    ->arrayNode('xml')
                         ->fixXmlConfig('whitelisted-doctype', 'doctype_whitelist')
                         ->addDefaultsIfNotSet()
                         ->children()
                             ->arrayNode('doctype_whitelist')
                                 ->prototype('scalar')->end()
                             ->end()
-                            ->booleanNode('external_entities')
-                                ->defaultFalse()
+                            ->booleanNode('format_output')
+                                ->defaultTrue()
                             ->end()
                         ->end()
                     ->end()

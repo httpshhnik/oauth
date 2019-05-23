@@ -1,125 +1,22 @@
 # Change Log
 
-## [3.2.0](https://github.com/schmittjoh/JMSSerializerBundle/tree/3.2.0) (2019-03-21)
-**Implemented enhancements:**
-
-- Iterator handler [\#720](https://github.com/schmittjoh/JMSSerializerBundle/pull/720) ([simPod](https://github.com/simPod))
-
-**Fixed bugs:**
-
-- DoctrinePHPCRTypeDrive is missing r [\#724](https://github.com/schmittjoh/JMSSerializerBundle/issues/724)
-
-**Closed issues:**
-
-- Deprecated error with Twig 2.7.2 [\#731](https://github.com/schmittjoh/JMSSerializerBundle/issues/731)
-- How to use "service" in Expose / Exclude [\#726](https://github.com/schmittjoh/JMSSerializerBundle/issues/726)
-- Event Subscriber not being fired [\#725](https://github.com/schmittjoh/JMSSerializerBundle/issues/725)
-- Expose / Exclude based on its ‘parent’ relationship in One to Many [\#723](https://github.com/schmittjoh/JMSSerializerBundle/issues/723)
-- Exclude / Expose based on value of its relationship [\#722](https://github.com/schmittjoh/JMSSerializerBundle/issues/722)
-- Deserializing don't work [\#721](https://github.com/schmittjoh/JMSSerializerBundle/issues/721)
-- Unrecognized option "xml" under "jms\_serializer.visitors". Available options are xml, json [\#719](https://github.com/schmittjoh/JMSSerializerBundle/issues/719)
--  jms/serializer-bundle 3.1.0 requires jms/serializer ^2.0 conflict with minimum-stability [\#717](https://github.com/schmittjoh/JMSSerializerBundle/issues/717)
+## [[2.4.4](https://github.com/schmittjoh/JMSSerializerBundle/tree/2.4.4) (2019-03-30)
 
 **Merged pull requests:**
 
-- Fix deprecation with Twig 2.7 [\#733](https://github.com/schmittjoh/JMSSerializerBundle/pull/733) ([enumag](https://github.com/enumag))
-- Fix typo in package name [\#732](https://github.com/schmittjoh/JMSSerializerBundle/pull/732) ([szepczynski](https://github.com/szepczynski))
-- Document expression language providers [\#714](https://github.com/schmittjoh/JMSSerializerBundle/pull/714) ([goetas](https://github.com/goetas))
+- Fix deprecation with Twig 2.7 \(2.x branch\) [\#736](https://github.com/schmittjoh/JMSSerializerBundle/pull/736) ([JustBlackBird](https://github.com/JustBlackBird))
 
-## [3.1.0](https://github.com/schmittjoh/JMSSerializerBundle/tree/3.1.0)
-
-**Implemented enhancements:**
-
-- Allow to add expression function providers using DI tags [\#711](https://github.com/schmittjoh/JMSSerializerBundle/pull/711) ([goetas](https://github.com/goetas))
-
-**Closed issues:**
-
-- Symfony 4 - Service "jms\_serializer" not found [\#713](https://github.com/schmittjoh/JMSSerializerBundle/issues/713)
-- Configuration property enable\_cache is missing [\#712](https://github.com/schmittjoh/JMSSerializerBundle/issues/712)
-- IndexBy in OneToMany Annotation is ignored [\#710](https://github.com/schmittjoh/JMSSerializerBundle/issues/710)
-- why there is backslash ? [\#709](https://github.com/schmittjoh/JMSSerializerBundle/issues/709)
-- Declaration must be compatible [\#708](https://github.com/schmittjoh/JMSSerializerBundle/issues/708)
-- Unrecognized option "xml" under "jms\_serializer.visitors" [\#698](https://github.com/schmittjoh/JMSSerializerBundle/issues/698)
-
-## [3.0.1](https://github.com/schmittjoh/JMSSerializerBundle/tree/3.0.1) (2018-12-12)
-**Fixed bugs:**
-
-- EventDispatcher - use case sensitive event names; [\#695](https://github.com/schmittjoh/JMSSerializerBundle/pull/695) ([gam6itko](https://github.com/gam6itko))
-
-**Closed issues:**
-
-- Symfony 4.2 deprecation: A tree builder without a root node is deprecated [\#707](https://github.com/schmittjoh/JMSSerializerBundle/issues/707)
-- DateTime / DateTime Deserialize without timezone [\#706](https://github.com/schmittjoh/JMSSerializerBundle/issues/706)
-- Argument 1 passed to JMS\Serializer\Metadata\Driver\AbstractDoctrineTypeDriver::normalizeFieldType\(\) must be of the type string, null given [\#701](https://github.com/schmittjoh/JMSSerializerBundle/issues/701)
+## [2.4.3](https://github.com/schmittjoh/JMSSerializerBundle/tree/2.4.3) (2018-12-12)
 
 **Merged pull requests:**
 
 - fix compatibility with Symfony Config 4.2 [\#705](https://github.com/schmittjoh/JMSSerializerBundle/pull/705) ([xabbuh](https://github.com/xabbuh))
-- Update services.xml [\#702](https://github.com/schmittjoh/JMSSerializerBundle/pull/702) ([enumag](https://github.com/enumag))
-- Xml keys were improperly named in config docs [\#696](https://github.com/schmittjoh/JMSSerializerBundle/pull/696) ([curiosity26](https://github.com/curiosity26))
-- Update .travis.yml [\#693](https://github.com/schmittjoh/JMSSerializerBundle/pull/693) ([andreybolonin](https://github.com/andreybolonin))
-
-## [3.0.0](https://github.com/schmittjoh/JMSSerializerBundle/tree/3.0.0) (2018-11-09)
-**Closed issues:**
-
-- jms\_serializer directory in cache is not writable [\#640](https://github.com/schmittjoh/JMSSerializerBundle/issues/640)
-
-**Merged pull requests:**
-
-- setSerializeNull option is available only on the serialization context [\#694](https://github.com/schmittjoh/JMSSerializerBundle/pull/694) ([goetas](https://github.com/goetas))
-
-## [3.0.0-RC2](https://github.com/schmittjoh/JMSSerializerBundle/tree/3.0.0-RC2) (2018-10-23)
-
-**Fixed bugs:**
-
-- Lazy services - Final classes cannot be proxied by ProxyManager [\#690](https://github.com/schmittjoh/JMSSerializerBundle/issues/690)
-
-**Closed issues:**
-
-- Provided class "JMS\Serializer\Handler\ArrayCollectionHandler" is final and cannot be proxied [\#692](https://github.com/schmittjoh/JMSSerializerBundle/issues/692)
-
-**Merged pull requests:**
-
-- remove lazy services, they are already lazy in many contexts [\#691](https://github.com/schmittjoh/JMSSerializerBundle/pull/691) ([goetas](https://github.com/goetas))
-
-## [3.0.0-RC1](https://github.com/schmittjoh/JMSSerializerBundle/tree/3.0.0-RC1) (2018-10-17)
-
-## [3.0.0-beta1](https://github.com/schmittjoh/JMSSerializerBundle/tree/3.0.0-beta1) (2018-09-12)
-
-**Implemented enhancements:**
-
-- Add autoconfigure for handlers [\#671](https://github.com/schmittjoh/JMSSerializerBundle/pull/671) ([magnetik](https://github.com/magnetik))
-
-**Closed issues:**
-
-- Hard cache removal - first JSON serialization has an unusual result [\#682](https://github.com/schmittjoh/JMSSerializerBundle/issues/682)
-- Avoiding the circular reference stop [\#679](https://github.com/schmittjoh/JMSSerializerBundle/issues/679)
-- . [\#673](https://github.com/schmittjoh/JMSSerializerBundle/issues/673)
-- Annotation Group not working on Entity using Symfony 4 [\#669](https://github.com/schmittjoh/JMSSerializerBundle/issues/669)
-- Regression since 2.4.1 [\#663](https://github.com/schmittjoh/JMSSerializerBundle/issues/663)
-- Example code for "Changing the Object Constructor" section does not show on the web page. [\#601](https://github.com/schmittjoh/JMSSerializerBundle/issues/601)
-
-**Merged pull requests:**
-
-- Enhancement: Normalize composer.json [\#677](https://github.com/schmittjoh/JMSSerializerBundle/pull/677) ([localheinz](https://github.com/localheinz))
-- Enhancement: Keep packages sorted in composer.json [\#676](https://github.com/schmittjoh/JMSSerializerBundle/pull/676) ([localheinz](https://github.com/localheinz))
-- Fix Constructors configuration section [\#675](https://github.com/schmittjoh/JMSSerializerBundle/pull/675) ([kinow](https://github.com/kinow))
 
 ## [2.4.2](https://github.com/schmittjoh/JMSSerializerBundle/tree/2.4.2) (2018-06-19)
 
-**Closed issues:**
+**Fixed bugs:**
 
-- XML serialization version and encoding configuration [\#661](https://github.com/schmittjoh/JMSSerializerBundle/issues/661)
-- \[2.4\] Stop-Watch-Listener is broken [\#660](https://github.com/schmittjoh/JMSSerializerBundle/issues/660)
-- Change license to MIT [\#655](https://github.com/schmittjoh/JMSSerializerBundle/issues/655)
-- Deserialize YAML [\#428](https://github.com/schmittjoh/JMSSerializerBundle/issues/428)
-- Runtime Naming Strategy [\#347](https://github.com/schmittjoh/JMSSerializerBundle/issues/347)
-
-**Merged pull requests:**
-
-- Hotfix Stable solrting [\#664](https://github.com/schmittjoh/JMSSerializerBundle/pull/664) ([bpolaszek](https://github.com/bpolaszek))
-- Moving to MIT license [\#659](https://github.com/schmittjoh/JMSSerializerBundle/pull/659) ([goetas](https://github.com/goetas))
-- Compatibility with jms/serializer 2.0 [\#652](https://github.com/schmittjoh/JMSSerializerBundle/pull/652) ([goetas](https://github.com/goetas))
+- Ensure always stable sorting [#664](https://github.com/schmittjoh/JMSSerializerBundle/issues/664)
 
 ## [2.4.1](https://github.com/schmittjoh/JMSSerializerBundle/tree/2.4.1) (2018-05-25)
 
@@ -128,12 +25,15 @@
 - Can not register custom handler for multiple types since \#645 [\#656](https://github.com/schmittjoh/JMSSerializerBundle/issues/656)
 - Fix serialization handler registration by priority [\#658](https://github.com/schmittjoh/JMSSerializerBundle/pull/658) ([goetas](https://github.com/goetas))
 
+**Closed issues:**
+
+- JMSSerializerBundle and propel [\#537](https://github.com/schmittjoh/JMSSerializerBundle/issues/537)
+
 **Merged pull requests:**
 
 - Fix serialization handler registration by priority [\#657](https://github.com/schmittjoh/JMSSerializerBundle/pull/657) ([discordier](https://github.com/discordier))
 
 ## [2.4.0](https://github.com/schmittjoh/JMSSerializerBundle/tree/2.4.0) (2018-05-20)
-
 **Implemented enhancements:**
 
 - Proposal: Add priorities feature to handlers [\#645](https://github.com/schmittjoh/JMSSerializerBundle/pull/645) ([adiq](https://github.com/adiq))
@@ -146,13 +46,17 @@
 - JMS Serializer add groups by some condition [\#646](https://github.com/schmittjoh/JMSSerializerBundle/issues/646)
 - Serializer ignores criteria query [\#643](https://github.com/schmittjoh/JMSSerializerBundle/issues/643)
 - Unable to override default handlers in Symfony 4 [\#642](https://github.com/schmittjoh/JMSSerializerBundle/issues/642)
+- Custom handle registration not compatible with Symfony 3.3+ [\#641](https://github.com/schmittjoh/JMSSerializerBundle/issues/641)
 - jms\_serializer directory in cache is not writable [\#640](https://github.com/schmittjoh/JMSSerializerBundle/issues/640)
+- Inheritance overriding ? [\#639](https://github.com/schmittjoh/JMSSerializerBundle/issues/639)
 - Problem with version 1.2.0 and library JMS\Serializer [\#636](https://github.com/schmittjoh/JMSSerializerBundle/issues/636)
 - Symfony 3.4 - jms\_serializer.json\_deserialization\_visitor service is private [\#632](https://github.com/schmittjoh/JMSSerializerBundle/issues/632)
 - DateTime custom handler not working [\#631](https://github.com/schmittjoh/JMSSerializerBundle/issues/631)
 - readOnly annotation with groups [\#628](https://github.com/schmittjoh/JMSSerializerBundle/issues/628)
 - Tag v2.3.1 [\#627](https://github.com/schmittjoh/JMSSerializerBundle/issues/627)
 - Subscribing Handler not used \(FOSRestBundle: ExceptionHandler\) [\#626](https://github.com/schmittjoh/JMSSerializerBundle/issues/626)
+- XML mapping doesn't map XmlKeyValuePairs but works for JSON [\#521](https://github.com/schmittjoh/JMSSerializerBundle/issues/521)
+- Mapping random key-value pair of XML payload in Symfony2 [\#470](https://github.com/schmittjoh/JMSSerializerBundle/issues/470)
 - Overwrite FormHandler [\#466](https://github.com/schmittjoh/JMSSerializerBundle/issues/466)
 
 **Merged pull requests:**
@@ -163,7 +67,6 @@
 - drop getDefinition\(\) in favor of findDefinition\(\) [\#630](https://github.com/schmittjoh/JMSSerializerBundle/pull/630) ([xabbuh](https://github.com/xabbuh))
 
 ## [2.3.1](https://github.com/schmittjoh/JMSSerializerBundle/tree/2.3.1) (2017-12-08)
-
 **Closed issues:**
 
 - Move `symfony/stopwatch` to `require` instead of `require-dev` [\#624](https://github.com/schmittjoh/JMSSerializerBundle/issues/624)
@@ -172,10 +75,8 @@
 **Merged pull requests:**
 
 - Extension \> Remove stopwatch subscriber when Stopwatch class is not found [\#625](https://github.com/schmittjoh/JMSSerializerBundle/pull/625) ([ruudk](https://github.com/ruudk))
-- Update Packagist link [\#622](https://github.com/schmittjoh/JMSSerializerBundle/pull/622) ([thePanz](https://github.com/thePanz))
 
 ## [2.3.0](https://github.com/schmittjoh/JMSSerializerBundle/tree/2.3.0) (2017-12-01)
-
 **Implemented enhancements:**
 
 - Cache warmup feature [\#615](https://github.com/schmittjoh/JMSSerializerBundle/pull/615) ([goetas](https://github.com/goetas))
@@ -187,12 +88,14 @@
 - Problem deserialize xml with namespace: xmlns="http://www.w3.org/2000/09/xmldsig\#" in tag root [\#613](https://github.com/schmittjoh/JMSSerializerBundle/issues/613)
 - Add support for kernel.cache\_warmer [\#611](https://github.com/schmittjoh/JMSSerializerBundle/issues/611)
 - Symfony 4 - Class 'jms\_serializer.stopwatch\_subscriber' not found [\#610](https://github.com/schmittjoh/JMSSerializerBundle/issues/610)
+- Error You must define a type for  [\#609](https://github.com/schmittjoh/JMSSerializerBundle/issues/609)
 - v2.0.0: The "name" property of directories must be given - but must we specify directories? [\#607](https://github.com/schmittjoh/JMSSerializerBundle/issues/607)
 - Add symfony/translation to required bundles [\#606](https://github.com/schmittjoh/JMSSerializerBundle/issues/606)
 - Integrate schmittjoh/serializer\#22 [\#603](https://github.com/schmittjoh/JMSSerializerBundle/issues/603)
 
 **Merged pull requests:**
 
+- Update Packagist link [\#622](https://github.com/schmittjoh/JMSSerializerBundle/pull/622) ([thePanz](https://github.com/thePanz))
 - Use stable symfony [\#621](https://github.com/schmittjoh/JMSSerializerBundle/pull/621) ([goetas](https://github.com/goetas))
 - make it possible to decorate services [\#620](https://github.com/schmittjoh/JMSSerializerBundle/pull/620) ([xabbuh](https://github.com/xabbuh))
 - support lazily loaded event listeners and handlers [\#618](https://github.com/schmittjoh/JMSSerializerBundle/pull/618) ([xabbuh](https://github.com/xabbuh))
@@ -200,7 +103,6 @@
 - Full Symfony 4 compatibility [\#605](https://github.com/schmittjoh/JMSSerializerBundle/pull/605) ([goetas](https://github.com/goetas))
 
 ## [2.2.0](https://github.com/schmittjoh/JMSSerializerBundle/tree/2.2.0) (2017-09-29)
-
 **Implemented enhancements:**
 
 - Injected validator.translation\_domain to FormErrorHandler [\#580](https://github.com/schmittjoh/JMSSerializerBundle/pull/580) ([prosalov](https://github.com/prosalov))
@@ -215,7 +117,6 @@
 - Remove dependencies from translator and form handler [\#604](https://github.com/schmittjoh/JMSSerializerBundle/pull/604) ([goetas](https://github.com/goetas))
 
 ## [2.1.0](https://github.com/schmittjoh/JMSSerializerBundle/tree/2.1.0) (2017-08-31)
-
 **Implemented enhancements:**
 
 - Allow event listener/susbcriber services to be private [\#593](https://github.com/schmittjoh/JMSSerializerBundle/issues/593)
@@ -229,6 +130,7 @@
 
 **Closed issues:**
 
+- Parent Class Exclude Problem [\#600](https://github.com/schmittjoh/JMSSerializerBundle/issues/600)
 - Gedmo Unrecognized field: createdAt - Error! [\#599](https://github.com/schmittjoh/JMSSerializerBundle/issues/599)
 - Array deserialization problem [\#597](https://github.com/schmittjoh/JMSSerializerBundle/issues/597)
 - Integrate JMSSerializer into Symfony PropertyInfo? [\#591](https://github.com/schmittjoh/JMSSerializerBundle/issues/591)
@@ -236,7 +138,11 @@
 - Can't use symfony serializer when requesting the id "serializer" [\#583](https://github.com/schmittjoh/JMSSerializerBundle/issues/583)
 - XML Collection names and null values [\#581](https://github.com/schmittjoh/JMSSerializerBundle/issues/581)
 - Not work for Symfony 3.3? [\#579](https://github.com/schmittjoh/JMSSerializerBundle/issues/579)
+- What are the 2.0 options default values changes about? [\#578](https://github.com/schmittjoh/JMSSerializerBundle/issues/578)
 - possible to register a handler that will compare against abstract classes [\#577](https://github.com/schmittjoh/JMSSerializerBundle/issues/577)
+- DoctrineObjectConstructor when load an existing entity [\#575](https://github.com/schmittjoh/JMSSerializerBundle/issues/575)
+- \[Question\] Is serialize\(\) use adders ? [\#574](https://github.com/schmittjoh/JMSSerializerBundle/issues/574)
+- Pagerfanta and Groups possible bug [\#485](https://github.com/schmittjoh/JMSSerializerBundle/issues/485)
 
 **Merged pull requests:**
 
@@ -249,20 +155,17 @@
 - compatibility with Symfony 4 [\#576](https://github.com/schmittjoh/JMSSerializerBundle/pull/576) ([xabbuh](https://github.com/xabbuh))
 
 ## [2.0.0](https://github.com/schmittjoh/JMSSerializerBundle/tree/2.0.0) (2017-05-17)
-
 **Closed issues:**
 
+- Serialize to xml : nested objects in single class [\#573](https://github.com/schmittjoh/JMSSerializerBundle/issues/573)
+- \[Question\] DeserializedName ? [\#572](https://github.com/schmittjoh/JMSSerializerBundle/issues/572)
+- JMSSerializerBundle 2.0 minimum requirements [\#561](https://github.com/schmittjoh/JMSSerializerBundle/issues/561)
 - Remove short "serializer" alias [\#558](https://github.com/schmittjoh/JMSSerializerBundle/issues/558)
 - Check for broken serialization metadata mappings [\#534](https://github.com/schmittjoh/JMSSerializerBundle/issues/534)
 - Serializing traits with JMSSerializer and YAML [\#424](https://github.com/schmittjoh/JMSSerializerBundle/issues/424)
 - Add kernel.cache\_clearer and/or kernel.cache\_warmer support [\#415](https://github.com/schmittjoh/JMSSerializerBundle/issues/415)
 
-**Merged pull requests:**
-
-- Preparing 2.0 [\#571](https://github.com/schmittjoh/JMSSerializerBundle/pull/571) ([goetas](https://github.com/goetas))
-
 ## [1.5.0](https://github.com/schmittjoh/JMSSerializerBundle/tree/1.5.0) (2017-05-10)
-
 **Implemented enhancements:**
 
 - Added configuration options for recent doctrine improvements [\#570](https://github.com/schmittjoh/JMSSerializerBundle/pull/570) ([goetas](https://github.com/goetas))
@@ -285,20 +188,21 @@
 - Can't override third party serializer config file [\#511](https://github.com/schmittjoh/JMSSerializerBundle/issues/511)
 - registering callback with a specific class name doesn't work . [\#508](https://github.com/schmittjoh/JMSSerializerBundle/issues/508)
 - change serialized name of a property when it is in a specific group [\#457](https://github.com/schmittjoh/JMSSerializerBundle/issues/457)
+- Is it possible to prevent type casting of deserialize method? [\#448](https://github.com/schmittjoh/JMSSerializerBundle/issues/448)
 - Serializing stdClass with arbitrary depth [\#414](https://github.com/schmittjoh/JMSSerializerBundle/issues/414)
 - Usage of @Groups [\#382](https://github.com/schmittjoh/JMSSerializerBundle/issues/382)
 - Serializing a stdClass [\#158](https://github.com/schmittjoh/JMSSerializerBundle/issues/158)
 - Add support for Traits \(PHP 5.4\) [\#102](https://github.com/schmittjoh/JMSSerializerBundle/issues/102)
 - @ExclusionPolicy\("all"\) is not respected by the parent classes [\#100](https://github.com/schmittjoh/JMSSerializerBundle/issues/100)
 
+**Merged pull requests:**
+
+- Preparing 2.0 [\#571](https://github.com/schmittjoh/JMSSerializerBundle/pull/571) ([goetas](https://github.com/goetas))
+
 ## [1.4.0](https://github.com/schmittjoh/JMSSerializerBundle/tree/1.4.0) (2017-04-10)
-
-**Fixed bugs:**
-
-- Alias not working any more with 1.3 [\#559](https://github.com/schmittjoh/JMSSerializerBundle/issues/559)
-
 **Closed issues:**
 
+- Serialize one to many relationship object [\#528](https://github.com/schmittjoh/JMSSerializerBundle/issues/528)
 - Document how to prevent JMS serializer from overriding Symfony serializer [\#513](https://github.com/schmittjoh/JMSSerializerBundle/issues/513)
 - AccessorOrder : properties vs virtualProperty [\#512](https://github.com/schmittjoh/JMSSerializerBundle/issues/512)
 - Specify @Serializer/Group for @Discriminator field  [\#506](https://github.com/schmittjoh/JMSSerializerBundle/issues/506)
@@ -333,11 +237,13 @@
 - Use svg build badge [\#560](https://github.com/schmittjoh/JMSSerializerBundle/pull/560) ([hanneskaeufler](https://github.com/hanneskaeufler))
 
 ## [1.3.1](https://github.com/schmittjoh/JMSSerializerBundle/tree/1.3.1) (2017-03-29)
-
 **Implemented enhancements:**
 
 - Added configuration for default context [\#556](https://github.com/schmittjoh/JMSSerializerBundle/pull/556) ([edefimov](https://github.com/edefimov))
-- add service definition for IdenticalPropertyNamingStrategy [\#445](https://github.com/schmittjoh/JMSSerializerBundle/pull/445) ([maff](https://github.com/maff))
+
+**Fixed bugs:**
+
+- Alias not working any more with 1.3 [\#559](https://github.com/schmittjoh/JMSSerializerBundle/issues/559)
 
 **Closed issues:**
 
@@ -346,12 +252,7 @@
 - property\_naming.id is not used? Property way to override the naming strategy [\#449](https://github.com/schmittjoh/JMSSerializerBundle/issues/449)
 - add option to alias field names [\#433](https://github.com/schmittjoh/JMSSerializerBundle/issues/433)
 
-**Merged pull requests:**
-
-- Fix "Changing the Object Constructor" doc samples [\#359](https://github.com/schmittjoh/JMSSerializerBundle/pull/359) ([hanneskaeufler](https://github.com/hanneskaeufler))
-
 ## [1.3.0](https://github.com/schmittjoh/JMSSerializerBundle/tree/1.3.0) (2017-03-28)
-
 **Closed issues:**
 
 - Force uppermost level of output json as object [\#555](https://github.com/schmittjoh/JMSSerializerBundle/issues/555)
@@ -368,11 +269,9 @@
 - Added handler tests [\#552](https://github.com/schmittjoh/JMSSerializerBundle/pull/552) ([goetas](https://github.com/goetas))
 - Allow service parameters in listener class name [\#551](https://github.com/schmittjoh/JMSSerializerBundle/pull/551) ([goetas](https://github.com/goetas))
 - Fix metadata directories loading where path is just a bundle name [\#550](https://github.com/schmittjoh/JMSSerializerBundle/pull/550) ([goetas](https://github.com/goetas))
-- Remove unused params in visitors [\#549](https://github.com/schmittjoh/JMSSerializerBundle/pull/549) ([goetas](https://github.com/goetas))
 - Expression language based virtual properties [\#545](https://github.com/schmittjoh/JMSSerializerBundle/pull/545) ([goetas](https://github.com/goetas))
 
 ## [1.2.1](https://github.com/schmittjoh/JMSSerializerBundle/tree/1.2.1) (2017-03-13)
-
 **Closed issues:**
 
 - After updating XmlList stop working  [\#548](https://github.com/schmittjoh/JMSSerializerBundle/issues/548)
@@ -380,10 +279,9 @@
 
 **Merged pull requests:**
 
-- Release v1.2.0 preview [\#546](https://github.com/schmittjoh/JMSSerializerBundle/pull/546) ([goetas](https://github.com/goetas))
+- Remove unused params in visitors [\#549](https://github.com/schmittjoh/JMSSerializerBundle/pull/549) ([goetas](https://github.com/goetas))
 
 ## [1.2.0](https://github.com/schmittjoh/JMSSerializerBundle/tree/1.2.0) (2017-02-22)
-
 **Implemented enhancements:**
 
 - Added expression language support [\#544](https://github.com/schmittjoh/JMSSerializerBundle/pull/544) ([goetas](https://github.com/goetas))
@@ -455,11 +353,11 @@
 
 **Merged pull requests:**
 
+- Release v1.2.0 preview [\#546](https://github.com/schmittjoh/JMSSerializerBundle/pull/546) ([goetas](https://github.com/goetas))
 - Improve build info and CI [\#542](https://github.com/schmittjoh/JMSSerializerBundle/pull/542) ([goetas](https://github.com/goetas))
 - Fix bad Tag name in error message [\#454](https://github.com/schmittjoh/JMSSerializerBundle/pull/454) ([lemoinem](https://github.com/lemoinem))
 
 ## [1.1.0](https://github.com/schmittjoh/JMSSerializerBundle/tree/1.1.0) (2015-11-10)
-
 **Closed issues:**
 
 - Twig\_Function\_Method class is deprecated since version 1.12 [\#490](https://github.com/schmittjoh/JMSSerializerBundle/issues/490)
@@ -482,6 +380,9 @@
 - Fix jms\_serializer.infer\_types\_from\_doctrine\_metadata usage [\#430](https://github.com/schmittjoh/JMSSerializerBundle/pull/430) ([magnetik](https://github.com/magnetik))
 
 ## [1.0.0](https://github.com/schmittjoh/JMSSerializerBundle/tree/1.0.0) (2015-06-23)
+**Implemented enhancements:**
+
+- add service definition for IdenticalPropertyNamingStrategy [\#445](https://github.com/schmittjoh/JMSSerializerBundle/pull/445) ([maff](https://github.com/maff))
 
 **Closed issues:**
 
@@ -522,9 +423,9 @@
 - \[Doc - Configuration\] Fix yaml code-block [\#402](https://github.com/schmittjoh/JMSSerializerBundle/pull/402) ([Peekmo](https://github.com/Peekmo))
 - Added more PHP versions and HHVM [\#399](https://github.com/schmittjoh/JMSSerializerBundle/pull/399) ([Nyholm](https://github.com/Nyholm))
 - Documentation Fix: When registering an event listener, you have to additional attribute "cl... [\#360](https://github.com/schmittjoh/JMSSerializerBundle/pull/360) ([epicwhale](https://github.com/epicwhale))
+- Fix "Changing the Object Constructor" doc samples [\#359](https://github.com/schmittjoh/JMSSerializerBundle/pull/359) ([hanneskaeufler](https://github.com/hanneskaeufler))
 
 ## [0.13.0](https://github.com/schmittjoh/JMSSerializerBundle/tree/0.13.0) (2013-12-05)
-
 **Closed issues:**
 
 - "array" type: Not working for arrays of DateTime objects [\#343](https://github.com/schmittjoh/JMSSerializerBundle/issues/343)
@@ -560,7 +461,6 @@
 - Fixed namespace in installation instructions [\#279](https://github.com/schmittjoh/JMSSerializerBundle/pull/279) ([mweimerskirch](https://github.com/mweimerskirch))
 
 ## [0.12.0](https://github.com/schmittjoh/JMSSerializerBundle/tree/0.12.0) (2013-07-29)
-
 **Closed issues:**
 
 - @ExclusionPolicy\("all"\) is not respected by the parent classes [\#311](https://github.com/schmittjoh/JMSSerializerBundle/issues/311)
@@ -588,7 +488,6 @@
 - Fixed the composer requirements [\#275](https://github.com/schmittjoh/JMSSerializerBundle/pull/275) ([stof](https://github.com/stof))
 
 ## [0.11.0](https://github.com/schmittjoh/JMSSerializerBundle/tree/0.11.0) (2013-02-12)
-
 **Closed issues:**
 
 - Exclusion policy for entity relationships [\#266](https://github.com/schmittjoh/JMSSerializerBundle/issues/266)
@@ -621,7 +520,6 @@
 - PHP templating helper. [\#208](https://github.com/schmittjoh/JMSSerializerBundle/pull/208) ([rafalwrzeszcz](https://github.com/rafalwrzeszcz))
 
 ## [0.10](https://github.com/schmittjoh/JMSSerializerBundle/tree/0.10) (2012-11-17)
-
 **Closed issues:**
 
 - xml\_root\_name not working [\#227](https://github.com/schmittjoh/JMSSerializerBundle/issues/227)
@@ -671,11 +569,8 @@
 - Nullable [\#177](https://github.com/schmittjoh/JMSSerializerBundle/pull/177) ([hashnz](https://github.com/hashnz))
 - Fix deserialization with custom handlers [\#169](https://github.com/schmittjoh/JMSSerializerBundle/pull/169) ([eugene-dounar](https://github.com/eugene-dounar))
 - Add an XmlAttributeMap [\#164](https://github.com/schmittjoh/JMSSerializerBundle/pull/164) ([adrienbrault](https://github.com/adrienbrault))
-- Fixed missing support for Accessor in YamlDriver [\#156](https://github.com/schmittjoh/JMSSerializerBundle/pull/156) ([wheelsandcogs](https://github.com/wheelsandcogs))
-- readonly flag should be set before setter, because the setter depends on that being set [\#154](https://github.com/schmittjoh/JMSSerializerBundle/pull/154) ([mvrhov](https://github.com/mvrhov))
 
 ## [0.9.0](https://github.com/schmittjoh/JMSSerializerBundle/tree/0.9.0) (2012-09-20)
-
 **Closed issues:**
 
 - @XMLList ignores child @XMLRoot and @XMLAttribute [\#176](https://github.com/schmittjoh/JMSSerializerBundle/issues/176)
@@ -749,6 +644,8 @@
 **Merged pull requests:**
 
 - Add missing use. [\#175](https://github.com/schmittjoh/JMSSerializerBundle/pull/175) ([armetiz](https://github.com/armetiz))
+- Fixed missing support for Accessor in YamlDriver [\#156](https://github.com/schmittjoh/JMSSerializerBundle/pull/156) ([wheelsandcogs](https://github.com/wheelsandcogs))
+- readonly flag should be set before setter, because the setter depends on that being set [\#154](https://github.com/schmittjoh/JMSSerializerBundle/pull/154) ([mvrhov](https://github.com/mvrhov))
 - Options for json\_encode [\#151](https://github.com/schmittjoh/JMSSerializerBundle/pull/151) ([megazoll](https://github.com/megazoll))
 - Always expose virtual properties by default [\#145](https://github.com/schmittjoh/JMSSerializerBundle/pull/145) ([Lumbendil](https://github.com/Lumbendil))
 - Support for xmlKeyValuePairs in xml and yml metadata driver [\#143](https://github.com/schmittjoh/JMSSerializerBundle/pull/143) ([Spea](https://github.com/Spea))

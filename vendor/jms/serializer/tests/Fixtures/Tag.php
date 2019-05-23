@@ -1,10 +1,9 @@
 <?php
 
-declare(strict_types=1);
-
 namespace JMS\Serializer\Tests\Fixtures;
 
 use JMS\Serializer\Annotation as JMS;
+
 
 /**
  * @JMS\XmlRoot("tag")
@@ -12,14 +11,17 @@ use JMS\Serializer\Annotation as JMS;
  */
 class Tag
 {
+
     /**
      * @JMS\XmlElement(cdata=false)
      * @JMS\Type("string")
      */
     public $name;
 
-    public function __construct($name)
+    function __construct($name)
     {
         $this->name = $name;
     }
-}
+
+
+} 

@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace JMS\Serializer\Tests\Fixtures;
 
 use JMS\Serializer\Annotation\AccessType;
@@ -25,7 +23,6 @@ class GetSetObject
 
     /**
      * This property should be exlcluded
-     *
      * @Exclude()
      */
     private $excludedProperty;

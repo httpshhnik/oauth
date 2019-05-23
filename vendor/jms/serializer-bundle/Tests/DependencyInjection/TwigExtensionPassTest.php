@@ -33,6 +33,7 @@ class TwigExtensionPassTest extends TestCase
         $pass->process($container);
 
         $extension = $container->getDefinition('jms_serializer.twig_extension.serializer');
+        $this->assertEquals('%jms_serializer.twig_extension.class%', (string)$extension->getClass());
         $this->assertCount(1, $extension->getArguments());
 
         $this->assertFalse($container->hasDefinition('jms_serializer.twig_extension.serializer_runtime_helper'));
@@ -40,7 +41,10 @@ class TwigExtensionPassTest extends TestCase
 
     public function testLazyExtension()
     {
-        if (!interface_exists('Twig_RuntimeLoaderInterface')) {
+        if (
+            !class_exists('JMS\Serializer\Twig\SerializerRuntimeExtension')
+            || !interface_exists('Twig_RuntimeLoaderInterface')
+        ) {
             $this->markTestSkipped("Lazy extensions are supported only by serializer 1.7.0");
         }
         $container = $this->getContainer();
@@ -51,9 +55,31 @@ class TwigExtensionPassTest extends TestCase
         $pass->process($container);
 
         $extension = $container->getDefinition('jms_serializer.twig_extension.serializer');
+        $this->assertEquals('%jms_serializer.twig_runtime_extension.class%', (string)$extension->getClass());
         $this->assertCount(0, $extension->getArguments());
 
         $this->assertTrue($container->hasDefinition('jms_serializer.twig_extension.serializer_runtime_helper'));
+    }
+
+    public function testLazyExtensionNotLoadedWhenOldSerializer()
+    {
+        $container = $this->getContainer();
+
+        $container->getParameterBag()->add(array(
+            'jms_serializer.twig_runtime_extension.class' => 'foo',
+            'jms_serializer.twig_runtime_extension_helper.class' => 'bar',
+        ));
+
+        $container->register('twig.runtime_loader');
+
+        $pass = new TwigExtensionPass();
+        $pass->process($container);
+
+        $extension = $container->getDefinition('jms_serializer.twig_extension.serializer');
+        $this->assertEquals('%jms_serializer.twig_extension.class%', (string)$extension->getClass());
+        $this->assertCount(1, $extension->getArguments());
+
+        $this->assertFalse($container->hasDefinition('jms_serializer.twig_extension.serializer_runtime_helper'));
     }
 }
 

@@ -33,6 +33,7 @@ class NamingStrategyTest extends TestCase
         $container = $this->getContainer(array(
             'property_naming' => array(
                 'id' => 'custom_naming_strategy',
+                'enable_cache' => false
             )
         ));
         $customNamingStrategy = new CustomNamingStrategy();
@@ -40,11 +41,23 @@ class NamingStrategyTest extends TestCase
 
         $this->assertSame($customNamingStrategy, $container->get('jms_serializer.naming_strategy'));
     }
+
+    public function testCachedNamingStrategy()
+    {
+        $container = $this->getContainer(array(
+            'property_naming' => array(
+                'enable_cache' => true
+            )
+        ));
+
+        $namingStrategy = $container->get('jms_serializer.naming_strategy');
+        $this->assertInstanceOf('JMS\Serializer\Naming\CacheNamingStrategy', $namingStrategy);
+    }
 }
 
 class CustomNamingStrategy implements PropertyNamingStrategyInterface
 {
-    public function translateName(PropertyMetadata $property):string
+    public function translateName(PropertyMetadata $property)
     {
         return 'foo';
     }

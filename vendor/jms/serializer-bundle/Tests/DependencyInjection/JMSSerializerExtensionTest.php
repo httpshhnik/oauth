@@ -61,11 +61,17 @@ class JMSSerializerExtensionTest extends TestCase
         $container = $this->getContainerForConfig(array(array()));
 
         $def = $container->getDefinition('jms_serializer');
-        $serializationFactoryArg = $def->getArgument(4);
-        $deSerializationFactoryArg = $def->getArgument(5);
+        $calls = $def->getMethodCalls();
 
-        $this->assertEquals('jms_serializer.serialization_context_factory', (string)$serializationFactoryArg);
-        $this->assertEquals('jms_serializer.deserialization_context_factory', (string)$deSerializationFactoryArg);
+        $this->assertCount(2, $calls);
+
+        $serializationCall = $calls[0];
+        $this->assertEquals('setSerializationContextFactory', $serializationCall[0]);
+        $this->assertEquals('jms_serializer.serialization_context_factory', (string)$serializationCall[1][0]);
+
+        $serializationCall = $calls[1];
+        $this->assertEquals('setDeserializationContextFactory', $serializationCall[0]);
+        $this->assertEquals('jms_serializer.deserialization_context_factory', (string)$serializationCall[1][0]);
     }
 
     public function testSerializerContextFactoriesWithId()
@@ -92,12 +98,20 @@ class JMSSerializerExtensionTest extends TestCase
         });
 
         $def = $container->getDefinition('jms_serializer');
+        $calls = $def->getMethodCalls();
 
-        $serializationFactoryArg = $def->getArgument(4);
-        $deSerializationFactoryArg = $def->getArgument(5);
+        $this->assertCount(2, $calls);
 
-        $this->assertEquals('foo', (string)$serializationFactoryArg);
-        $this->assertEquals('bar', (string)$deSerializationFactoryArg);
+        $serializationCall = $calls[0];
+        $this->assertEquals('setSerializationContextFactory', $serializationCall[0]);
+        $this->assertEquals('foo', (string)$serializationCall[1][0]);
+
+        $serializationCall = $calls[1];
+        $this->assertEquals('setDeserializationContextFactory', $serializationCall[0]);
+        $this->assertEquals('bar', (string)$serializationCall[1][0]);
+
+        $this->assertEquals('bar', (string)$container->getAlias('jms_serializer.deserialization_context_factory'));
+        $this->assertEquals('foo', (string)$container->getAlias('jms_serializer.serialization_context_factory'));
     }
 
     public function testLoadWithoutTranslator()
@@ -343,42 +357,43 @@ class JMSSerializerExtensionTest extends TestCase
      */
     public function testJsonVisitorOptions($expectedOptions, $config)
     {
-        $container = $this->getContainerForConfigLoad(array($config));
-        $visitor = $container->getDefinition('jms_serializer.json_serialization_visitor');
-
-        $calls = $visitor->getMethodCalls();
-
-        $this->assertEquals("setOptions", $calls[0][0]);
-        $this->assertEquals($expectedOptions, $calls[0][1][0]);
+        $container = $this->getContainerForConfig(array($config), function ($container) {
+            $container->getDefinition('jms_serializer.json_serialization_visitor')->setPublic(true);
+        });
+        $this->assertSame($expectedOptions, $container->get('jms_serializer.json_serialization_visitor')->getOptions());
     }
 
     public function getJsonVisitorConfigs()
     {
         $configs = array();
 
-        $configs[] = array(JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT, array(
-            'visitors' => array(
-                'json_serialization' => array(
-                    'options' => array('JSON_UNESCAPED_UNICODE', 'JSON_PRETTY_PRINT')
+        if (version_compare(PHP_VERSION, '5.4', '>=')) {
+            $configs[] = array(JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT, array(
+                'visitors' => array(
+                    'json' => array(
+                        'options' => array('JSON_UNESCAPED_UNICODE', 'JSON_PRETTY_PRINT')
+                    )
                 )
-            )
-        ));
+            ));
 
-        $configs[] = array(JSON_UNESCAPED_UNICODE, array(
-            'visitors' => array(
-                'json_serialization' => array(
-                    'options' => 'JSON_UNESCAPED_UNICODE'
+            $configs[] = array(JSON_UNESCAPED_UNICODE, array(
+                'visitors' => array(
+                    'json' => array(
+                        'options' => 'JSON_UNESCAPED_UNICODE'
+                    )
                 )
-            )
-        ));
+            ));
+        }
 
         $configs[] = array(128, array(
             'visitors' => array(
-                'json_serialization' => array(
+                'json' => array(
                     'options' => 128
                 )
             )
         ));
+
+        $configs[] = array(0, array());
 
         return $configs;
     }
@@ -392,9 +407,9 @@ class JMSSerializerExtensionTest extends TestCase
         $serializer = $container->get('jms_serializer');
         // test that all components have been wired correctly
         $object = new ObjectUsingExpressionLanguage('foo', true);
-        $this->assertEquals('{"virtual":"bar","name":"foo"}', $serializer->serialize($object, 'json'));
+        $this->assertEquals('{"name":"foo"}', $serializer->serialize($object, 'json'));
         $object = new ObjectUsingExpressionLanguage('foo', false);
-        $this->assertEquals('{"virtual":"bar"}', $serializer->serialize($object, 'json'));
+        $this->assertEquals('{}', $serializer->serialize($object, 'json'));
     }
 
     public function testExpressionLanguageVirtualProperties()
@@ -439,7 +454,7 @@ class JMSSerializerExtensionTest extends TestCase
 
     /**
      * @expectedException \Symfony\Component\Config\Definition\Exception\InvalidConfigurationException
-     * @expectedExceptionMessage Invalid configuration for path "jms_serializer.expression_evaluator.id": You need at least symfony/expression-language v2.6 or v3.0 to use the expression evaluator features
+     * @expectedExceptionMessage Invalid configuration for path "jms_serializer.expression_evaluator.id": You need at least symfony/expression language v2.6 or v3.0 to use the expression evaluator features
      */
     public function testExpressionInvalidEvaluator()
     {
@@ -454,13 +469,10 @@ class JMSSerializerExtensionTest extends TestCase
      */
     public function testXmlVisitorOptions($expectedOptions, $config)
     {
-        $container = $this->getContainerForConfigLoad(array($config));
-        $visitor = $container->getDefinition('jms_serializer.xml_deserialization_visitor');
-
-        $calls = $visitor->getMethodCalls();
-
-        $this->assertEquals("setDoctypeWhitelist", $calls[0][0]);
-        $this->assertEquals($expectedOptions, $calls[0][1][0]);
+        $container = $this->getContainerForConfig(array($config), function ($container) {
+            $container->getDefinition('jms_serializer.xml_deserialization_visitor')->setPublic(true);
+        });
+        $this->assertSame($expectedOptions, $container->get('jms_serializer.xml_deserialization_visitor')->getDoctypeWhitelist());
     }
 
     public function getXmlVisitorWhitelists()
@@ -469,11 +481,13 @@ class JMSSerializerExtensionTest extends TestCase
 
         $configs[] = array(array('good document', 'other good document'), array(
             'visitors' => array(
-                'xml_deserialization' => array(
+                'xml' => array(
                     'doctype_whitelist' => array('good document', 'other good document'),
                 )
             )
         ));
+
+        $configs[] = array(array(), array());
 
         return $configs;
     }
@@ -482,18 +496,24 @@ class JMSSerializerExtensionTest extends TestCase
     {
         $config = array(
             'visitors' => array(
-                'xml_serialization' => array(
-                    'format_output' => true,
+                'xml' => array(
+                    'format_output' => false,
                 )
             )
         );
-        $container = $this->getContainerForConfigLoad(array($config));
-        $visitor = $container->getDefinition('jms_serializer.xml_serialization_visitor');
+        $container = $this->getContainerForConfig(array($config), function ($container) {
+            $container->getDefinition('jms_serializer.xml_serialization_visitor')->setPublic(true);
+        });
 
-        $calls = $visitor->getMethodCalls();
+        $this->assertFalse($container->get('jms_serializer.xml_serialization_visitor')->isFormatOutput());
+    }
 
-        $this->assertEquals("setFormatOutput", $calls[0][0]);
-        $this->assertEquals(true, $calls[0][1][0]);
+    public function testXmlVisitorDefaultValueToFormatOutput()
+    {
+        $container = $this->getContainerForConfig(array(), function ($container) {
+            $container->getDefinition('jms_serializer.xml_serialization_visitor')->setPublic(true);
+        });
+        $this->assertTrue($container->get('jms_serializer.xml_serialization_visitor')->isFormatOutput());
     }
 
     public function testAutoconfigureSubscribers()
@@ -515,13 +535,20 @@ class JMSSerializerExtensionTest extends TestCase
     public function testAutoconfigureHandlers()
     {
         $container = $this->getContainerForConfig(array());
+
+        if (!method_exists($container, 'registerForAutoconfiguration')) {
+            $this->markTestSkipped(
+                'registerForAutoconfiguration method is not available in the container'
+            );
+        }
+
         $autoconfigureInstance = $container->getAutoconfiguredInstanceof();
 
         $this->assertTrue(array_key_exists(SubscribingHandlerInterface::class, $autoconfigureInstance));
         $this->assertTrue($autoconfigureInstance[SubscribingHandlerInterface::class]->hasTag('jms_serializer.subscribing_handler'));
     }
 
-    private function getContainerForConfigLoad(array $configs, callable $configurator = null)
+    private function getContainerForConfig(array $configs, callable $configurator = null)
     {
         $bundle = new JMSSerializerBundle();
         $extension = $bundle->getContainerExtension();
@@ -530,7 +557,6 @@ class JMSSerializerExtensionTest extends TestCase
         $container->setParameter('kernel.debug', true);
         $container->setParameter('kernel.cache_dir', sys_get_temp_dir() . '/serializer');
         $container->setParameter('kernel.bundles', array());
-        $container->setParameter('foo', 'bar');
         $container->set('annotation_reader', new AnnotationReader());
         $container->setDefinition('doctrine', new Definition(Registry::class));
         $container->set('translator', $this->getMockBuilder('Symfony\\Component\\Translation\\TranslatorInterface')->getMock());
@@ -539,12 +565,7 @@ class JMSSerializerExtensionTest extends TestCase
         $extension->load($configs, $container);
 
         $bundle->build($container);
-        return $container;
-    }
 
-    private function getContainerForConfig(array $configs, callable $configurator = null)
-    {
-        $container = $this->getContainerForConfigLoad($configs);
         if ($configurator) {
             call_user_func($configurator, $container);
         }
